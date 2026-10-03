@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asesmen Formatif Scaffolded-Box: Dimensi Tiga</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- MathJax Configuration & CDN for Beautiful Equations -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    },
+                    colors: {
+                        tealBrand: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        @keyframes pulse-subtle {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.02); opacity: 0.95; }
+        }
+        .highlight-pulse {
+            animation: pulse-subtle 2s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col antialiased">
+
+    <!-- Header Area -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                <div class="flex items-center space-x-3">
+                    <div class="p-2.5 bg-teal-600 text-white rounded-xl shadow-sm">
+                        <i class="fa-solid fa-cube text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs font-semibold uppercase tracking-wider text-teal-600 bg-teal-50 px-2 py-0.5 rounded-md">Asesmen Formatif Digital</span>
+                        <h1 class="text-lg font-bold text-slate-900 leading-tight">Dimensi Tiga: Jarak Titik ke Garis</h1>
+                    </div>
+                </div>
+
+                <!-- Metrics & Quick Info -->
+                <div class="flex items-center space-x-3 sm:space-x-6 text-sm">
+                    <!-- Progress Bar -->
+                    <div class="flex flex-col min-w-[140px] sm:min-w-[180px]">
+                        <div class="flex justify-between text-xs font-medium text-slate-600 mb-1">
+                            <span>Kemajuan</span>
+                            <span id="progressText" class="font-bold text-teal-700">0 / 4 Step</span>
+                        </div>
+                        <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden border border-slate-200">
+                            <div id="progressBar" class="bg-teal-500 h-2.5 rounded-full transition-all duration-500 w-0"></div>
+                        </div>
+                    </div>
+
+                    <!-- Hint Counter -->
+                    <div class="flex items-center space-x-2 bg-amber-50 border border-amber-200 text-amber-800 px-3 py-1.5 rounded-lg">
+                        <i class="fa-solid fa-lightbulb text-amber-500 text-base"></i>
+                        <div class="text-xs">
+                            <span class="block text-[10px] uppercase font-semibold text-amber-600 leading-none">Hint Dipakai</span>
+                            <span id="hintCountBadge" class="font-bold text-sm leading-none">0</span>
+                        </div>
+                    </div>
+
+                    <!-- Status Tag -->
+                    <div id="statusBadge" class="bg-slate-100 text-slate-700 border border-slate-200 text-xs px-2.5 py-1.5 rounded-lg font-medium flex items-center space-x-1.5">
+                        <span class="w-2 h-2 rounded-full bg-slate-400"></span>
+                        <span>Belum Selesai</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+        
+        <!-- Identitas Siswa Box -->
+        <section class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+            <h2 class="text-sm font-bold text-slate-800 uppercase tracking-wider mb-3 flex items-center gap-2">
+                <i class="fa-solid fa-user-graduate text-teal-600"></i> Identitas Peserta Didik
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Nama Lengkap Siswa</label>
+                    <input type="text" id="studentName" placeholder="Masukkan nama Anda..." class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-sm focus:ring-2 focus:ring-teal-500 focus:bg-white text-slate-800 font-medium transition">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Kelas / No. Absen</label>
+                    <input type="text" id="studentClass" placeholder="Contoh: XII F-1 / 15" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-sm focus:ring-2 focus:ring-teal-500 focus:bg-white text-slate-800 font-medium transition">
+                </div>
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            
+            <!-- Left Side: Context & Interactive 3D Cube Visualizer -->
+            <section class="lg:col-span-5 lg:sticky lg:top-20 space-y-4">
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-4">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                        <h2 class="font-bold text-slate-800 flex items-center gap-2">
+                            <i class="fa-solid fa-circle-info text-teal-600"></i>
+                            Stimulus Soal Utama
+                        </h2>
+                        <span class="bg-slate-100 text-slate-600 text-xs font-mono px-2 py-0.5 rounded">Kubus ABCD.EFGH</span>
+                    </div>
+
+                    <!-- Problem Text -->
+                    <div class="bg-teal-50/60 border border-teal-100 rounded-xl p-4 text-slate-700 text-sm leading-relaxed">
+                        <p class="font-medium text-slate-900 mb-1">Soal:</p>
+                        <p>Diberikan kubus <span class="font-bold text-teal-800">ABCD.EFGH</span> dengan panjang rusuk <span class="font-bold text-teal-800">$s = 6\text{ cm}$</span>. Hitunglah jarak dari <span class="font-bold text-rose-600">titik F</span> ke <span class="font-bold text-blue-600">garis AC</span>!</p>
+                    </div>
+
+                    <!-- Canvas Visualization Box -->
+                    <div class="bg-slate-900 rounded-xl p-3 relative overflow-hidden shadow-inner flex flex-col items-center">
+                        <div class="absolute top-3 left-3 text-xs text-slate-400 font-mono flex items-center gap-1.5 z-10">
+                            <i class="fa-solid fa-arrows-spin text-teal-400"></i> Visualisasi Kubus 3D
+                        </div>
+                        
+                        <div class="absolute top-3 right-3 flex gap-1 z-10">
+                            <button id="toggleTriBtn" onclick="toggleTriangle()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs px-2.5 py-1 rounded border border-slate-700 transition flex items-center gap-1">
+                                <i class="fa-solid fa-draw-polygon text-amber-400"></i> Δ FAC
+                            </button>
+                            <button id="resetRotBtn" onclick="resetRotation()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs px-2 py-1 rounded border border-slate-700 transition" title="Reset Pandangan">
+                                <i class="fa-solid fa-rotate-left"></i>
+                            </button>
+                        </div>
+
+                        <!-- Canvas Element -->
+                        <canvas id="cubeCanvas" class="w-full h-64 sm:h-72 cursor-grab active:cursor-grabbing rounded-lg"></canvas>
+
+                        <!-- Visual Helper Guide Below Canvas -->
+                        <div class="w-full mt-2 pt-2 border-t border-slate-800 text-[11px] text-slate-400 flex justify-between items-center px-1">
+                            <span><i class="fa-solid fa-hand-pointer text-slate-500"></i> Drag mouse/sentuh untuk merotasi</span>
+                            <div class="flex items-center space-x-3">
+                                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-rose-500 inline-block"></span> Titik F</span>
+                                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-blue-500 inline-block"></span> Garis AC</span>
+                                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-amber-400 inline-block"></span> Garis FO</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Reference Formula Accordion -->
+                    <div class="border border-slate-200 rounded-xl overflow-hidden">
+                        <button id="accordionToggle" class="w-full bg-slate-50 hover:bg-slate-100 p-3 text-left text-xs font-semibold text-slate-700 flex justify-between items-center transition">
+                            <span class="flex items-center gap-2">
+                                <i class="fa-solid fa-bookmark text-teal-600"></i> CATATAN KONSEP KUNCI
+                            </span>
+                            <i id="accordionIcon" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                        </button>
+                        <div id="accordionContent" class="hidden p-3 bg-white text-xs text-slate-600 space-y-2 border-t border-slate-200">
+                            <p><strong class="text-slate-800">1. Diagonal Sisi Kubus:</strong> Rusuk $s \rightarrow d = s\sqrt{2}$</p>
+                            <p><strong class="text-slate-800">2. Diagonal Ruang Kubus:</strong> Rusuk $s \rightarrow d_r = s\sqrt{3}$</p>
+                            <p><strong class="text-slate-800">3. Proyeksi Tegak Lurus:</strong> Jarak titik ke garis adalah panjang ruas garis terpendek dari titik ke garis tersebut (tegak lurus / siku-siku).</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Side: Scaffolded-Box Steps & Assessment Flow -->
+            <section class="lg:col-span-7 space-y-5">
+
+                <!-- STEP 1 BOX -->
+                <div id="box-step-1" class="step-card bg-white rounded-2xl border-2 border-teal-500 shadow-md p-5 transition-all duration-300">
+                    <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+                        <div class="flex items-center space-x-3">
+                            <span class="step-badge w-8 h-8 rounded-xl bg-teal-600 text-white font-bold flex items-center justify-center text-sm shadow-sm">1</span>
+                            <div>
+                                <h3 class="font-bold text-slate-900 text-base">Box 1: Identifikasi Segitiga Bantuan & Jenisnya</h3>
+                                <p class="text-xs text-slate-500">Menganalisis panjang sisi pembentuk segitiga FAC</p>
+                            </div>
+                        </div>
+                        <span id="badge-status-1" class="bg-teal-50 text-teal-700 border border-teal-200 text-xs px-2.5 py-1 rounded-md font-semibold">Sedang Dikerjakan</span>
+                    </div>
+
+                    <div class="space-y-4">
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            Hubungkan titik <span class="font-bold text-rose-600">F</span> ke titik <span class="font-bold text-blue-600">A</span> dan titik <span class="font-bold text-blue-600">C</span> untuk membentuk segitiga bantuan <span class="font-bold text-amber-600">FAC</span>. 
+                            Berapakah panjang FA, FC, dan AC, serta jenis segitiga apakah <span class="font-bold text-amber-600">FAC</span>?
+                        </p>
+
+                        <!-- Input Section -->
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                            <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider">Pilih Pernyataan Sisi & Jenis Segitiga yang Tepat:</label>
+                            
+                            <div class="space-y-2 text-sm">
+                                <label class="flex items-start space-x-3 p-2.5 bg-white border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-100 transition">
+                                    <input type="radio" name="q1_option" value="opt1" class="mt-0.5 text-teal-600 focus:ring-teal-500">
+                                    <span class="text-slate-700">FA, FC, dan AC adalah diagonal sisi ($6\sqrt{2}\text{ cm}$). Segitiga FAC adalah <strong>Segitiga Sama Sisi</strong>.</span>
+                                </label>
+                                <label class="flex items-start space-x-3 p-2.5 bg-white border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-100 transition">
+                                    <input type="radio" name="q1_option" value="opt2" class="mt-0.5 text-teal-600 focus:ring-teal-500">
+                                    <span class="text-slate-700">FA dan FC adalah rusuk ($6\text{ cm}$), AC diagonal sisi ($6\sqrt{2}\text{ cm}$). Segitiga FAC adalah <strong>Segitiga Sama Kaki</strong>.</span>
+                                </label>
+                                <label class="flex items-start space-x-3 p-2.5 bg-white border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-100 transition">
+                                    <input type="radio" name="q1_option" value="opt3" class="mt-0.5 text-teal-600 focus:ring-teal-500">
+                                    <span class="text-slate-700">FA = FC = $6\sqrt{3}\text{ cm}$ dan AC = $6\text{ cm}$. Segitiga FAC adalah <strong>Segitiga Sembarang</strong>.</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Feedback Box -->
+                        <div id="feedback-1" class="hidden p-3 rounded-lg text-xs font-medium"></div>
+
+                        <!-- Actions -->
+                        <div class="flex flex-wrap items-center justify-between gap-2 pt-2">
+                            <button onclick="requestHint(1)" class="bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 text-xs font-medium px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 shadow-sm">
+                                <i class="fa-solid fa-lightbulb text-amber-500"></i>
+                                <span>Butuh Bantuan? (<span id="hint-lvl-badge-1">Hint Level 1</span>)</span>
+                            </button>
+                            <button onclick="checkStep1()" class="bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs px-5 py-2.5 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-2">
+                                <span>Cek Jawaban</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <div id="hint-box-1" class="hidden space-y-2 pt-2 border-t border-slate-100"></div>
+                    </div>
+                </div>
+
+                <!-- STEP 2 BOX -->
+                <div id="box-step-2" class="step-card bg-slate-100 rounded-2xl border border-slate-200 shadow-sm p-5 opacity-60 pointer-events-none transition-all duration-300">
+                    <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-200">
+                        <div class="flex items-center space-x-3">
+                            <span class="step-badge w-8 h-8 rounded-xl bg-slate-400 text-white font-bold flex items-center justify-center text-sm">2</span>
+                            <div>
+                                <h3 class="font-bold text-slate-800 text-base">Box 2: Proyeksi Titik F ke Garis AC</h3>
+                                <p class="text-xs text-slate-500">Menentukan titik siku-siku acuan pada garis AC</p>
+                            </div>
+                        </div>
+                        <span id="badge-status-2" class="bg-slate-200 text-slate-600 text-xs px-2.5 py-1 rounded-md font-semibold"><i class="fa-solid fa-lock text-[10px] mr-1"></i>Terkunci</span>
+                    </div>
+
+                    <div class="space-y-4">
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            Jika kita membuat titik <span class="font-bold text-amber-600">O</span> tepat berada di <strong>tengah-tengah garis AC</strong>, bagaimanakah posisi ruas garis <span class="font-bold text-amber-600">FO</span> terhadap garis <span class="font-bold text-blue-600">AC</span>?
+                        </p>
+
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                            <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider">Lengkapi Pernyataan Berikut:</label>
+                            <p class="text-sm text-slate-700">
+                                Garis FO tegak lurus dengan AC ($\text{FO} \perp \text{AC}$), sehingga jarak titik F ke garis AC sama dengan panjang ruas garis 
+                                <select id="q2_select" class="inline-block mx-1 text-sm bg-white border border-slate-300 rounded-lg px-2 py-1 focus:ring-2 focus:ring-teal-500 font-semibold text-teal-700">
+                                    <option value="">-- Pilih Ruas Garis --</option>
+                                    <option value="FA">FA</option>
+                                    <option value="FO">FO</option>
+                                    <option value="FC">FC</option>
+                                    <option value="AO">AO</option>
+                                </select>
+                            </p>
+                        </div>
+
+                        <div id="feedback-2" class="hidden p-3 rounded-lg text-xs font-medium"></div>
+
+                        <div class="flex flex-wrap items-center justify-between gap-2 pt-2">
+                            <button onclick="requestHint(2)" class="bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 text-xs font-medium px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 shadow-sm">
+                                <i class="fa-solid fa-lightbulb text-amber-500"></i>
+                                <span>Butuh Bantuan? (<span id="hint-lvl-badge-2">Hint Level 1</span>)</span>
+                            </button>
+                            <button onclick="checkStep2()" class="bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs px-5 py-2.5 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-2">
+                                <span>Cek Jawaban</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <div id="hint-box-2" class="hidden space-y-2 pt-2 border-t border-slate-100"></div>
+                    </div>
+                </div>
+
+                <!-- STEP 3 BOX -->
+                <div id="box-step-3" class="step-card bg-slate-100 rounded-2xl border border-slate-200 shadow-sm p-5 opacity-60 pointer-events-none transition-all duration-300">
+                    <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-200">
+                        <div class="flex items-center space-x-3">
+                            <span class="step-badge w-8 h-8 rounded-xl bg-slate-400 text-white font-bold flex items-center justify-center text-sm">3</span>
+                            <div>
+                                <h3 class="font-bold text-slate-800 text-base">Box 3: Menghitung Panjang AO (Setengah AC)</h3>
+                                <p class="text-xs text-slate-500">Menentukan salah satu Sisi Siku-Siku pada $\Delta \text{FOA}$</p>
+                            </div>
+                        </div>
+                        <span id="badge-status-3" class="bg-slate-200 text-slate-600 text-xs px-2.5 py-1 rounded-md font-semibold"><i class="fa-solid fa-lock text-[10px] mr-1"></i>Terkunci</span>
+                    </div>
+
+                    <div class="space-y-4">
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            Karena O adalah titik tengah AC, maka $\text{AO} = \frac{1}{2} \times \text{AC}$. Diketahui dari Box 1 bahwa panjang $\text{AC} = 6\sqrt{2}\text{ cm}$. 
+                            Hitunglah nilai panjang <span class="font-bold text-teal-700">AO</span>!
+                        </p>
+
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                            <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider">Masukkan Hasil Panjang AO:</label>
+                            
+                            <div class="flex items-center gap-2 max-w-xs">
+                                <span class="text-sm font-semibold text-slate-700">AO =</span>
+                                <input type="text" id="q3_input" placeholder="contoh: 3√2" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-teal-500 font-mono font-medium text-slate-800">
+                                <span class="text-sm font-medium text-slate-500">cm</span>
+                            </div>
+
+                            <div class="flex items-center gap-1.5 pt-1">
+                                <span class="text-[11px] text-slate-500 font-medium">Simbol Cepat:</span>
+                                <button type="button" onclick="insertSymbol('q3_input', '√2')" class="px-2 py-0.5 bg-white border border-slate-300 hover:bg-slate-100 rounded text-xs font-mono font-bold text-slate-700 shadow-sm">√2</button>
+                                <button type="button" onclick="insertSymbol('q3_input', '√3')" class="px-2 py-0.5 bg-white border border-slate-300 hover:bg-slate-100 rounded text-xs font-mono font-bold text-slate-700 shadow-sm">√3</button>
+                                <button type="button" onclick="insertSymbol('q3_input', '√6')" class="px-2 py-0.5 bg-white border border-slate-300 hover:bg-slate-100 rounded text-xs font-mono font-bold text-slate-700 shadow-sm">√6</button>
+                            </div>
+                        </div>
+
+                        <div id="feedback-3" class="hidden p-3 rounded-lg text-xs font-medium"></div>
+
+                        <div class="flex flex-wrap items-center justify-between gap-2 pt-2">
+                            <button onclick="requestHint(3)" class="bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 text-xs font-medium px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 shadow-sm">
+                                <i class="fa-solid fa-lightbulb text-amber-500"></i>
+                                <span>Butuh Bantuan? (<span id="hint-lvl-badge-3">Hint Level 1</span>)</span>
+                            </button>
+                            <button onclick="checkStep3()" class="bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs px-5 py-2.5 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-2">
+                                <span>Cek Jawaban</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <div id="hint-box-3" class="hidden space-y-2 pt-2 border-t border-slate-100"></div>
+                    </div>
+                </div>
+
+                <!-- STEP 4 BOX -->
+                <div id="box-step-4" class="step-card bg-slate-100 rounded-2xl border border-slate-200 shadow-sm p-5 opacity-60 pointer-events-none transition-all duration-300">
+                    <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-200">
+                        <div class="flex items-center space-x-3">
+                            <span class="step-badge w-8 h-8 rounded-xl bg-slate-400 text-white font-bold flex items-center justify-center text-sm">4</span>
+                            <div>
+                                <h3 class="font-bold text-slate-800 text-base">Box 4: Kalkulasi Akhir Jarak FO (Pythagoras $\Delta \text{FOA}$)</h3>
+                                <p class="text-xs text-slate-500">Perhitungan Teorema Pythagoras untuk hasil akhir</p>
+                            </div>
+                        </div>
+                        <span id="badge-status-4" class="bg-slate-200 text-slate-600 text-xs px-2.5 py-1 rounded-md font-semibold"><i class="fa-solid fa-lock text-[10px] mr-1"></i>Terkunci</span>
+                    </div>
+
+                    <div class="space-y-4">
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            Perhatikan segitiga <span class="font-bold text-amber-600">FOA</span> yang siku-siku di titik <span class="font-bold text-amber-600">O</span>. 
+                            Gunakan rumusan Teorema Pythagoras: $\text{FO} = \sqrt{\text{FA}^2 - \text{AO}^2}$ dengan $\text{FA} = 6\sqrt{2}\text{ cm}$ dan $\text{AO} = 3\sqrt{2}\text{ cm}$.
+                        </p>
+
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                            <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider">Hitung Panjang FO (Jarak Akhir Titik F ke Garis AC):</label>
+                            
+                            <div class="flex items-center gap-2 max-w-xs">
+                                <span class="text-sm font-semibold text-slate-700">FO =</span>
+                                <input type="text" id="q4_input" placeholder="contoh: 3√6" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-teal-500 font-mono font-medium text-slate-800">
+                                <span class="text-sm font-medium text-slate-500">cm</span>
+                            </div>
+
+                            <div class="flex items-center gap-1.5 pt-1">
+                                <span class="text-[11px] text-slate-500 font-medium">Simbol Cepat:</span>
+                                <button type="button" onclick="insertSymbol('q4_input', '√2')" class="px-2 py-0.5 bg-white border border-slate-300 hover:bg-slate-100 rounded text-xs font-mono font-bold text-slate-700 shadow-sm">√2</button>
+                                <button type="button" onclick="insertSymbol('q4_input', '√3')" class="px-2 py-0.5 bg-white border border-slate-300 hover:bg-slate-100 rounded text-xs font-mono font-bold text-slate-700 shadow-sm">√3</button>
+                                <button type="button" onclick="insertSymbol('q4_input', '√6')" class="px-2 py-0.5 bg-white border border-slate-300 hover:bg-slate-100 rounded text-xs font-mono font-bold text-slate-700 shadow-sm">√6</button>
+                            </div>
+                        </div>
+
+                        <div id="feedback-4" class="hidden p-3 rounded-lg text-xs font-medium"></div>
+
+                        <div class="flex flex-wrap items-center justify-between gap-2 pt-2">
+                            <button onclick="requestHint(4)" class="bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 text-xs font-medium px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 shadow-sm">
+                                <i class="fa-solid fa-lightbulb text-amber-500"></i>
+                                <span>Butuh Bantuan? (<span id="hint-lvl-badge-4">Hint Level 1</span>)</span>
+                            </button>
+                            <button onclick="checkStep4()" class="bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs px-5 py-2.5 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-2">
+                                <span>Selesaikan Asesmen</span>
+                                <i class="fa-solid fa-circle-check"></i>
+                            </button>
+                        </div>
+
+                        <div id="hint-box-4" class="hidden space-y-2 pt-2 border-t border-slate-100"></div>
+                    </div>
+                </div>
+
+                <!-- Assessment Report Card (Hidden until finished) -->
+                <div id="reportCard" class="hidden bg-gradient-to-br from-teal-900 to-slate-900 text-white rounded-2xl p-6 shadow-xl space-y-6 border border-teal-700">
+                    <div class="flex items-center justify-between border-b border-teal-700/60 pb-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="p-3 bg-teal-500/20 rounded-xl text-teal-300 border border-teal-500/30">
+                                <i class="fa-solid fa-award text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-white">Laporan Ketuntasan Asesmen Formatif</h3>
+                                <p class="text-xs text-teal-200">Hasil Scaffolded-Box Learning dengan Hint Option</p>
+                            </div>
+                        </div>
+                        <span class="bg-teal-500/20 text-teal-300 border border-teal-500/40 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Tuntas</span>
+                    </div>
+
+                    <!-- Student Info Summary in Report -->
+                    <div class="bg-white/10 rounded-xl p-3 text-xs flex justify-between items-center border border-white/10">
+                        <div>
+                            <span class="text-teal-300 font-semibold">Nama Siswa:</span> <span id="reportStudentName" class="font-bold text-white">-[Belum diisi]-</span>
+                        </div>
+                        <div>
+                            <span class="text-teal-300 font-semibold">Kelas:</span> <span id="reportStudentClass" class="font-bold text-white">-[Belum diisi]-</span>
+                        </div>
+                    </div>
+
+                    <!-- Summary Grid -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                        <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
+                            <span class="block text-[11px] text-teal-200 uppercase font-semibold">Status</span>
+                            <span class="text-sm font-bold text-emerald-400 mt-1 block"><i class="fa-solid fa-circle-check mr-1"></i>100% TUNTAS</span>
+                        </div>
+                        <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
+                            <span class="block text-[11px] text-teal-200 uppercase font-semibold">Total Hint Buka</span>
+                            <span id="reportTotalHints" class="text-lg font-bold text-amber-300 mt-1 block">0 Hint</span>
+                        </div>
+                        <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
+                            <span class="block text-[11px] text-teal-200 uppercase font-semibold">Tingkat Mandiri</span>
+                            <span id="reportIndependence" class="text-sm font-bold text-cyan-300 mt-1 block">Tinggi</span>
+                        </div>
+                        <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
+                            <span class="block text-[11px] text-teal-200 uppercase font-semibold">Hasil Akhir FO</span>
+                            <span class="text-base font-mono font-bold text-teal-300 mt-1 block">$3\sqrt{6}\text{ cm}$</span>
+                        </div>
+                    </div>
+
+                    <!-- Diagnostic & Reflection Note -->
+                    <div class="bg-white/5 border border-white/10 rounded-xl p-4 space-y-2">
+                        <h4 class="text-xs font-bold text-teal-300 uppercase tracking-wider flex items-center gap-2">
+                            <i class="fa-solid fa-chart-line"></i> Analisis & Rekomendasi Guru:
+                        </h4>
+                        <p id="reportFeedbackText" class="text-xs text-slate-300 leading-relaxed">
+                            Selamat! Anda berhasil menyelesaikan asesmen formatif ini tanpa mengalami *zero-response* (kebuntuan).
+                        </p>
+                    </div>
+
+                    <!-- Actions: Reset, Next Question & Send to Teacher -->
+<div class="flex flex-wrap justify-end gap-3 pt-2">
+    <button onclick="resetAssessment()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs px-4 py-2.5 rounded-xl border border-slate-600 transition flex items-center gap-2">
+        <i class="fa-solid fa-rotate-right"></i>
+        <span>Ulangi Asesmen</span>
+    </button>
+    <button onclick="unlockSoal2()" class="bg-teal-600 hover:bg-teal-500 text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition flex items-center gap-2 shadow-md cursor-pointer">
+    <span>Lanjut ke Soal 2 (Panggung Krapyak)</span>
+    <i class="fa-solid fa-arrow-right"></i>
+</button>
+    <button onclick="submitToTeacher()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow-lg transition flex items-center gap-2">
+        <i class="fa-brands fa-whatsapp text-lg"></i>
+        <span>Kirim Laporan ke Guru</span>
+    </button>
+</div>
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // State Management
+        const state = {
+            currentStep: 1,
+            completedSteps: [false, false, false, false],
+            hintLevel: [0, 0, 0, 0],
+            totalHintsUsed: 0,
+            showHighlightTri: true,
+            rotX: 0.3,
+            rotY: -0.6
+        };
+
+        // Hint Content Database
+        const hintsDB = {
+            1: [
+                { lvl: 1, title: "Hint 1 (Konseptual)", text: "Ingat kembali: Ruas garis FA, FC, dan AC terletak pada muka-muka kubus (AFEB, CGFB, dan ABCD). Ketiganya merupakan diagonal sisi kubus." },
+                { lvl: 2, title: "Hint 2 (Operasional)", text: "Rumus diagonal sisi kubus dengan rusuk $s$ adalah $s\\sqrt{2}$. Karena rusuk $s = 6\\text{ cm}$, maka panjang $\\text{FA} = \\text{FC} = \\text{AC} = 6\\sqrt{2}\\text{ cm}$." },
+                { lvl: 3, title: "Hint 3 (Jawaban Parsial)", text: "Karena ketiga sisinya memilki panjang yang persis sama ($6\\sqrt{2}\\text{ cm}$), maka segitiga FAC tergolong Segitiga Sama Sisi." }
+            ],
+            2: [
+                { lvl: 1, title: "Hint 1 (Konseptual)", text: "Jarak titik ke garis didefinisikan sebagai panjang garis tegak lurus (siku-siku $90^\\circ$) dari titik tersebut ke garis tujuan." },
+                { lvl: 2, title: "Hint 2 (Operasional)", text: "Pada segitiga sama sisi FAC, garis tinggi dari titik puncak F akan membagi sisi alas AC menjadi dua bagian yang persis sama di titik tengah O." },
+                { lvl: 3, title: "Hint 3 (Jawaban Parsial)", text: "Oleh karena itu, garis tinggi yang tegak lurus dengan AC adalah ruas garis FO." }
+            ],
+            3: [
+                { lvl: 1, title: "Hint 1 (Konseptual)", text: "Titik O berada tepat di tengah-tengah AC. Maka panjang AO adalah setengah dari panjang total AC." },
+                { lvl: 2, title: "Hint 2 (Operasional)", text: "$\\text{AO} = \\frac{1}{2} \\times \\text{AC}$. Masukkan nilai $\\text{AC} = 6\\sqrt{2}\\text{ cm}$ ke dalam perkalian tersebut." },
+                { lvl: 3, title: "Hint 3 (Jawaban Parsial)", text: "$\\text{AO} = \\frac{1}{2} \\times 6\\sqrt{2} = 3\\sqrt{2}\\text{ cm}$." }
+            ],
+            4: [
+                { lvl: 1, title: "Hint 1 (Konseptual)", text: "Pada segitiga FOA (siku-siku di O), Sisi miring (hipotenusa) adalah FA, sedangkan sisi alas adalah AO. Tinggi segitiga adalah FO." },
+                { lvl: 2, title: "Hint 2 (Operasional)", text: "Gunakan rumus $\\text{FO} = \\sqrt{\\text{FA}^2 - \\text{AO}^2}$. $\\text{FA}^2 = (6\\sqrt{2})^2 = 72$, dan $\\text{AO}^2 = (3\\sqrt{2})^2 = 18$." },
+                { lvl: 3, title: "Hint 3 (Jawaban Parsial)", text: "$\\text{FO} = \\sqrt{72 - 18} = \\sqrt{54}$. Sederhanakan $\\sqrt{54} = \\sqrt{9 \\times 6} = 3\\sqrt{6}\\text{ cm}$." }
+            ]
+        };
+
+        // Initialize App on DOM Load
+        window.addEventListener('DOMContentLoaded', () => {
+            initCubeCanvas();
+            setupAccordion();
+        });
+
+        function insertSymbol(inputId, symbol) {
+            const el = document.getElementById(inputId);
+            if (el) {
+                el.value += symbol;
+                el.focus();
+            }
+        }
+
+        function setupAccordion() {
+            const btn = document.getElementById('accordionToggle');
+            const content = document.getElementById('accordionContent');
+            const icon = document.getElementById('accordionIcon');
+
+            btn.addEventListener('click', () => {
+                content.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        }
+
+        function requestHint(step) {
+            const stepIdx = step - 1;
+            const currentLvl = state.hintLevel[stepIdx];
+
+            if (currentLvl < 3) {
+                state.hintLevel[stepIdx]++;
+                state.totalHintsUsed++;
+                updateHeaderMetrics();
+
+                const hintData = hintsDB[step][state.hintLevel[stepIdx] - 1];
+                renderHintBox(step, hintData);
+            }
+
+            const badge = document.getElementById(`hint-lvl-badge-${step}`);
+            if (badge) {
+                if (state.hintLevel[stepIdx] >= 3) {
+                    badge.innerText = "Semua Hint Terbuka";
+                } else {
+                    badge.innerText = `Hint Level ${state.hintLevel[stepIdx] + 1}`;
+                }
+            }
+        }
+
+        function renderHintBox(step, hintData) {
+            const hintContainer = document.getElementById(`hint-box-${step}`);
+            hintContainer.classList.remove('hidden');
+
+            const hintCard = document.createElement('div');
+            hintCard.className = "bg-amber-50/80 border-l-4 border-amber-400 p-3 rounded-r-lg text-xs space-y-1 animate-fade-in";
+            hintCard.innerHTML = `
+                <div class="font-bold text-amber-900 flex items-center gap-1.5">
+                    <i class="fa-solid fa-lightbulb text-amber-500"></i> ${hintData.title}
+                </div>
+                <p class="text-amber-800 leading-relaxed">${hintData.text}</p>
+            `;
+            hintContainer.appendChild(hintCard);
+
+            if (window.MathJax) {
+                MathJax.typesetPromise([hintCard]);
+            }
+        }
+
+        function checkStep1() {
+            const selected = document.querySelector('input[name="q1_option"]:checked');
+            const feedback = document.getElementById('feedback-1');
+
+            if (!selected) {
+                showFeedback(feedback, 'warning', 'Pilih salah satu jawaban terlebih dahulu!');
+                return;
+            }
+
+            if (selected.value === 'opt1') {
+                showFeedback(feedback, 'success', 'Tepat sekali! FA, FC, dan AC ketiganya adalah diagonal sisi kubus ($6\\sqrt{2}\\text{ cm}$), sehingga $\\Delta\\text{FAC}$ adalah segitiga sama sisi.');
+                completeStep(1);
+                unlockStep(2);
+            } else {
+                showFeedback(feedback, 'error', 'Jawaban belum tepat. Coba perhatikan posisi garis FA, FC, dan AC pada dinding-dinding kubus. Masing-masing adalah diagonal sisi!');
+            }
+        }
+
+        function checkStep2() {
+            const val = document.getElementById('q2_select').value;
+            const feedback = document.getElementById('feedback-2');
+
+            if (!val) {
+                showFeedback(feedback, 'warning', 'Pilih ruas garis terlebih dahulu!');
+                return;
+            }
+
+            if (val === 'FO') {
+                showFeedback(feedback, 'success', 'Benar! Garis FO menghubungkan puncak F ke titik tengah O pada alas AC dan membentuk sudut tegak lurus ($90^\\circ$).');
+                completeStep(2);
+                unlockStep(3);
+            } else {
+                showFeedback(feedback, 'error', 'Masih belum tepat. Garis tinggi proyeksi yang tegak lurus dari titik F ke titik tengah O adalah FO.');
+            }
+        }
+
+        function checkStep3() {
+            const val = document.getElementById('q3_input').value.trim().toLowerCase();
+            const feedback = document.getElementById('feedback-3');
+
+            if (!val) {
+                showFeedback(feedback, 'warning', 'Ketikkan jawaban Anda terlebih dahulu!');
+                return;
+            }
+
+            const isValid = val.includes('3') && (val.includes('√2') || val.includes('akar 2') || val.includes('sqrt 2') || val.includes('v2'));
+
+            if (isValid) {
+                showFeedback(feedback, 'success', 'Sempurna! Panjang $\\text{AO} = \\frac{1}{2} \\times 6\\sqrt{2} = 3\\sqrt{2}\\text{ cm}$.');
+                completeStep(3);
+                unlockStep(4);
+            } else {
+                showFeedback(feedback, 'error', 'Jawaban kurang tepat. Hitunglah $\\frac{1}{2}$ dikali dengan $6\\sqrt{2}$.');
+            }
+        }
+
+        function checkStep4() {
+            const val = document.getElementById('q4_input').value.trim().toLowerCase();
+            const feedback = document.getElementById('feedback-4');
+
+            if (!val) {
+                showFeedback(feedback, 'warning', 'Ketikkan jawaban hasil akhir Anda!');
+                return;
+            }
+
+            const isValid = val.includes('3') && (val.includes('√6') || val.includes('akar 6') || val.includes('sqrt 6') || val.includes('v6'));
+
+            if (isValid) {
+                showFeedback(feedback, 'success', 'Luar Biasa! Hasil $\\text{FO} = \\sqrt{72 - 18} = \\sqrt{54} = 3\\sqrt{6}\\text{ cm}$.');
+                completeStep(4);
+                finishAssessment();
+            } else {
+                showFeedback(feedback, 'error', 'Hitungan belum tepat. Coba periksa kembali: $\\text{FO}^2 = (6\\sqrt{2})^2 - (3\\sqrt{2})^2 = 72 - 18 = 54$.');
+            }
+        }
+
+        function showFeedback(el, type, message) {
+            el.classList.remove('hidden', 'bg-rose-50', 'text-rose-800', 'border-rose-200', 'bg-emerald-50', 'text-emerald-800', 'border-emerald-200', 'bg-amber-50', 'text-amber-800', 'border-amber-200');
+            el.classList.add('border');
+
+            if (type === 'success') {
+                el.classList.add('bg-emerald-50', 'text-emerald-800', 'border-emerald-200');
+                el.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i> ${message}`;
+            } else if (type === 'error') {
+                el.classList.add('bg-rose-50', 'text-rose-800', 'border-rose-200');
+                el.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-600 mr-1.5"></i> ${message}`;
+            } else {
+                el.classList.add('bg-amber-50', 'text-amber-800', 'border-amber-200');
+                el.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-amber-600 mr-1.5"></i> ${message}`;
+            }
+
+            if (window.MathJax) {
+                MathJax.typesetPromise([el]);
+            }
+        }
+
+        function completeStep(step) {
+            state.completedSteps[step - 1] = true;
+            
+            const box = document.getElementById(`box-step-${step}`);
+            box.classList.remove('border-teal-500');
+            box.classList.add('border-emerald-400', 'bg-emerald-50/20');
+
+            const badge = document.getElementById(`badge-status-${step}`);
+            badge.className = "bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs px-2.5 py-1 rounded-md font-bold flex items-center gap-1";
+            badge.innerHTML = '<i class="fa-solid fa-check"></i> Selesai';
+
+            const stepBadge = box.querySelector('.step-badge');
+            if (stepBadge) {
+                stepBadge.classList.remove('bg-teal-600', 'bg-slate-400');
+                stepBadge.classList.add('bg-emerald-600');
+            }
+
+            updateHeaderMetrics();
+        }
+
+        function unlockStep(nextStep) {
+            state.currentStep = nextStep;
+            const nextBox = document.getElementById(`box-step-${nextStep}`);
+            nextBox.classList.remove('opacity-60', 'pointer-events-none', 'bg-slate-100');
+            nextBox.classList.add('bg-white', 'border-2', 'border-teal-500', 'shadow-md');
+
+            const badge = document.getElementById(`badge-status-${nextStep}`);
+            badge.className = "bg-teal-50 text-teal-700 border border-teal-200 text-xs px-2.5 py-1 rounded-md font-semibold";
+            badge.innerText = "Sedang Dikerjakan";
+
+            const stepBadge = nextBox.querySelector('.step-badge');
+            if (stepBadge) {
+                stepBadge.classList.remove('bg-slate-400');
+                stepBadge.classList.add('bg-teal-600');
+            }
+
+            setTimeout(() => {
+                nextBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 300);
+        }
+
+        function updateHeaderMetrics() {
+            const completedCount = state.completedSteps.filter(Boolean).length;
+            const percent = (completedCount / 4) * 100;
+            document.getElementById('progressBar').style.width = `${percent}%`;
+            document.getElementById('progressText').innerText = `${completedCount} / 4 Step`;
+
+            document.getElementById('hintCountBadge').innerText = state.totalHintsUsed;
+
+            const statusBadge = document.getElementById('statusBadge');
+            if (completedCount === 4) {
+                statusBadge.className = "bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs px-2.5 py-1.5 rounded-lg font-bold flex items-center space-x-1.5";
+                statusBadge.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-500"></span><span>Tuntas</span>';
+            } else if (completedCount > 0) {
+                statusBadge.className = "bg-amber-100 text-amber-800 border border-amber-300 text-xs px-2.5 py-1.5 rounded-lg font-semibold flex items-center space-x-1.5";
+                statusBadge.innerHTML = '<span class="w-2 h-2 rounded-full bg-amber-500"></span><span>Dalam Progres</span>';
+            }
+        }
+
+        function finishAssessment() {
+            const report = document.getElementById('reportCard');
+            report.classList.remove('hidden');
+
+            const sName = document.getElementById('studentName').value.trim() || "Siswa (Tanpa Nama)";
+            const sClass = document.getElementById('studentClass').value.trim() || "-";
+
+            document.getElementById('reportStudentName').innerText = sName;
+            document.getElementById('reportStudentClass').innerText = sClass;
+            document.getElementById('reportTotalHints').innerText = `${state.totalHintsUsed} Hint`;
+
+            let independenceLevel = "Sangat Tinggi";
+            let feedback = "Luar biasa! Anda memahami konsep proyeksi dimensi tiga dan Teorema Pythagoras secara mandiri dengan sangat baik tanpa banyak bantuan hint.";
+
+            if (state.totalHintsUsed >= 6) {
+                independenceLevel = "Perlu Bimbingan";
+                feedback = "Anda telah menyelesaikan tugas dengan baik melalui bantuan hint bertingkat. Disarankan untuk melatih kembali soal serupa secara mandiri.";
+            } else if (state.totalHintsUsed >= 3) {
+                independenceLevel = "Cukup Mandiri";
+                feedback = "Bagus! Anda memanfaatkan scaffolding hint secara efisien saat mengalami keraguan untuk mencapai ketuntasan belajar.";
+            }
+
+            document.getElementById('reportIndependence').innerText = independenceLevel;
+            document.getElementById('reportFeedbackText').innerText = feedback;
+
+            if (window.MathJax) {
+                MathJax.typesetPromise([report]);
+            }
+
+            setTimeout(() => {
+                report.scrollIntoView({ behavior: 'smooth' });
+            }, 300);
+        }
+
+        function resetAssessment() {
+            window.location.reload();
+        }
+
+        function submitToTeacher() {
+            const name = document.getElementById('studentName').value.trim() || "Nama belum diisi";
+            const studentClass = document.getElementById('studentClass').value.trim() || "Kelas belum diisi";
+            const hints = state.totalHintsUsed;
+            const indep = document.getElementById('reportIndependence').innerText;
+
+            const textPesan = `*LAPORAN HASIL ASESMEN FORMATIF DIGITAL*\n` +
+                              `-----------------------------------\n` +
+                              `*Nama:* ${name}\n` +
+                              `*Kelas/Absen:* ${studentClass}\n` +
+                              `*Materi:* Dimensi Tiga (Jarak Titik F ke Garis AC)\n` +
+                              `*Status:* 100% TUNTAS\n` +
+                              `*Total Hint Digunakan:* ${hints} Hint\n` +
+                              `*Tingkat Kemandirian:* ${indep}\n` +
+                              `*Jawaban Akhir (FO):* 3√6 cm\n` +
+                              `-----------------------------------\n` +
+                              `_Dikirim otomatis via Asesmen Digital Scaffolded-Box._`;
+
+            const encodedText = encodeURIComponent(textPesan);
+            window.open(`https://api.whatsapp.com/send?text=${encodedText}`, '_blank');
+        }
+
+        // 3D Canvas Rendering Engine
+        let isDragging = false;
+        let previousMousePosition = { x: 0, y: 0 };
+
+        function initCubeCanvas() {
+            const canvas = document.getElementById('cubeCanvas');
+            const ctx = canvas.getContext('2d');
+
+            function resize() {
+                const rect = canvas.getBoundingClientRect();
+                canvas.width = rect.width * window.devicePixelRatio;
+                canvas.height = rect.height * window.devicePixelRatio;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            // Cube 3D Coordinates
+            const vertices = [
+                {x:-1, y:-1, z:-1, label:'A'}, {x: 1, y:-1, z:-1, label:'B'},
+                {x: 1, y: 1, z:-1, label:'C'}, {x:-1, y: 1, z:-1, label:'D'},
+                {x:-1, y:-1, z: 1, label:'E'}, {x: 1, y:-1, z: 1, label:'F'},
+                {x: 1, y: 1, z: 1, label:'G'}, {x:-1, y: 1, z: 1, label:'H'}
+            ];
+
+            const edges = [
+                [0,1],[1,2],[2,3],[3,0],
+                [4,5],[5,6],[6,7],[7,4],
+                [0,4],[1,5],[2,6],[3,7]
+            ];
+
+            canvas.addEventListener('mousedown', e => {
+                isDragging = true;
+                previousMousePosition = { x: e.clientX, y: e.clientY };
+            });
+
+            canvas.addEventListener('mousemove', e => {
+                if (!isDragging) return;
+                const deltaX = e.clientX - previousMousePosition.x;
+                const deltaY = e.clientY - previousMousePosition.y;
+
+                state.rotY += deltaX * 0.01;
+                state.rotX += deltaY * 0.01;
+
+                previousMousePosition = { x: e.clientX, y: e.clientY };
+            });
+
+            window.addEventListener('mouseup', () => isDragging = false);
+
+            // Touch support for mobile
+            canvas.addEventListener('touchstart', e => {
+                if(e.touches.length === 1) {
+                    isDragging = true;
+                    previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+                }
+            });
+
+            canvas.addEventListener('touchmove', e => {
+                if (!isDragging || e.touches.length !== 1) return;
+                const deltaX = e.touches[0].clientX - previousMousePosition.x;
+                const deltaY = e.touches[0].clientY - previousMousePosition.y;
+
+                state.rotY += deltaX * 0.01;
+                state.rotX += deltaY * 0.01;
+
+                previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+            });
+
+            canvas.addEventListener('touchend', () => isDragging = false);
+
+            function project(p) {
+                // Rotation around X
+                let y1 = p.y * Math.cos(state.rotX) - p.z * Math.sin(state.rotX);
+                let z1 = p.y * Math.sin(state.rotX) + p.z * Math.cos(state.rotX);
+                
+                // Rotation around Y
+                let x2 = p.x * Math.cos(state.rotY) + z1 * Math.sin(state.rotY);
+                let z2 = -p.x * Math.sin(state.rotY) + z1 * Math.cos(state.rotY);
+
+                const scale = Math.min(canvas.width, canvas.height) * 0.22;
+                return {
+                    x: canvas.width / 2 + x2 * scale,
+                    y: canvas.height / 2 - y1 * scale,
+                    z: z2
+                };
+            }
+
+            function render() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                const projected = vertices.map(v => project(v));
+
+                // Draw standard edges
+                ctx.strokeStyle = '#475569';
+                ctx.lineWidth = 1.5 * window.devicePixelRatio;
+                edges.forEach(([i, j]) => {
+                    ctx.beginPath();
+                    ctx.moveTo(projected[i].x, projected[i].y);
+                    ctx.lineTo(projected[j].x, projected[j].y);
+                    ctx.stroke();
+                });
+
+                // Compute point O (midpoint of AC: A=0, C=2)
+                const pA = projected[0], pC = projected[2], pF = projected[5];
+                const pO = { x: (pA.x + pC.x) / 2, y: (pA.y + pC.y) / 2 };
+
+                // Draw highlighted Triangle & Auxiliary Lines
+                if (state.showHighlightTri) {
+                    // Line AC (Blue)
+                    ctx.strokeStyle = '#3b82f6';
+                    ctx.lineWidth = 3 * window.devicePixelRatio;
+                    ctx.beginPath();
+                    ctx.moveTo(pA.x, pA.y);
+                    ctx.lineTo(pC.x, pC.y);
+                    ctx.stroke();
+
+                    // Lines FA and FC (Amber)
+                    ctx.strokeStyle = '#f59e0b';
+                    ctx.lineWidth = 2.5 * window.devicePixelRatio;
+                    ctx.beginPath();
+                    ctx.moveTo(pF.x, pF.y);
+                    ctx.lineTo(pA.x, pA.y);
+                    ctx.moveTo(pF.x, pF.y);
+                    ctx.lineTo(pC.x, pC.y);
+                    ctx.stroke();
+
+                    // Projection Line FO (Amber Dashed)
+                    ctx.strokeStyle = '#fbbf24';
+                    ctx.setLineDash([5, 5]);
+                    ctx.beginPath();
+                    ctx.moveTo(pF.x, pF.y);
+                    ctx.lineTo(pO.x, pO.y);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                }
+
+                // Draw Vertices
+                projected.forEach((p, idx) => {
+                    ctx.fillStyle = (idx === 5) ? '#ef4444' : '#0f172a'; // Point F is Red
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, (idx === 5 ? 6 : 4) * window.devicePixelRatio, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    ctx.fillStyle = '#f8fafc';
+                    ctx.font = `bold ${12 * window.devicePixelRatio}px Inter`;
+                    ctx.fillText(vertices[idx].label, p.x + 8, p.y - 8);
+                });
+
+                // Draw Point O
+                if (state.showHighlightTri) {
+                    ctx.fillStyle = '#f59e0b';
+                    ctx.beginPath();
+                    ctx.arc(pO.x, pO.y, 5 * window.devicePixelRatio, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    ctx.fillStyle = '#fbbf24';
+                    ctx.font = `bold ${12 * window.devicePixelRatio}px Inter`;
+                    ctx.fillText("O", pO.x + 8, pO.y + 12);
+                }
+
+                requestAnimationFrame(render);
+            }
+
+            render();
+        }
+
+        function toggleTriangle() {
+            state.showHighlightTri = !state.showHighlightTri;
+        }
+
+        function resetRotation() {
+            state.rotX = 0.3;
+            state.rotY = -0.6;
+        }
+    </script>
+
+        <!-- ==================== SOAL 2 (TERKUNCI SEBELUM SOAL 1 SELESAI) ==================== -->
+       <!-- ==================== SOAL 2 (TERKUNCI SEBELUM SOAL 1 SELESAI) ==================== -->
+        <section id="sec-soal-2" class="space-y-6 opacity-40 pointer-events-none relative transition-all duration-500">
+            
+            <div id="lock-overlay-2" class="absolute inset-0 z-20 flex flex-col items-center justify-center locked-overlay rounded-2xl border-2 border-dashed border-slate-300 p-6 text-center backdrop-blur-sm bg-white/60">
+                <div class="p-4 bg-slate-200 text-slate-600 rounded-full mb-3 shadow-inner">
+                    <i class="fa-solid fa-lock text-3xl"></i>
+                </div>
+                <h3 class="text-base font-bold text-slate-800">Soal 2 Terkunci</h3>
+                <p class="text-xs text-slate-500 max-w-md mt-1">Selesaikan seluruh Box Scaffolding pada <strong>Soal 1</strong> di atas untuk membuka akses ke Soal 2 (Konteks Panggung Krapyak).</p>
+            </div>
+
+            <div class="flex items-center justify-between bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-amber-500 text-white rounded-full flex items-center justify-center text-sm">2</span>
+                    Soal 2: Panggung Krapyak – Memecah Miskonsepsi Proyeksi
+                </h2>
+                <span id="badge-soal-2" class="text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full border border-slate-200">Terkunci</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Left: Stimulus & SVG Diagram -->
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4 sticky top-20">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                                <i class="fa-solid fa-archway text-amber-600"></i> Konteks Realistis Panggung Krapyak
+                            </span>
+                            <span class="text-xs font-mono bg-amber-50 text-amber-700 px-2 py-0.5 rounded border border-amber-200">13m × 13m × 10m</span>
+                        </div>
+
+                        <div class="bg-amber-50/60 border border-amber-200 p-4 rounded-xl text-sm leading-relaxed text-slate-800 space-y-2">
+                            <strong>Deskripsi Kasus:</strong><br>
+                            Panggung Krapyak merupakan bangunan bersejarah Kesultanan Mataram di Yogyakarta berdenah persegi dengan ukuran alas $13\text{ m} \times 13\text{ m}$ dan tinggi $10\text{ m}$. Ditemodelkan sebagai balok $ABCD.EFGH$ dengan $AB=BC=CD=DA=13\text{ m}$ dan tinggi $AE=BF=CG=DH=10\text{ m}$. Tim teknis memasang kabel pemeliharaan dari sudut atap atas belakang-kiri (<strong>titik H</strong>) menuju garis fondasi bawah samping-kanan (<strong>garis BC</strong>).
+                        </div>
+
+                        <!-- Canvas Diagram Soal 2 (Presisi Balok ABCD.EFGH) -->
+                        <div class="bg-slate-900 rounded-xl p-4 text-white relative flex flex-col items-center justify-center min-h-[240px]">
+                            <svg width="240" height="190" viewBox="0 0 240 190" class="stroke-white fill-none stroke-2">
+                                <!-- Face Belakang CDHG -->
+                                <polygon points="40,150 160,150 160,60 40,60" stroke="#475569" stroke-dasharray="4,4" />
+                                <!-- Face Depan ABEF -->
+                                <polygon points="80,180 200,180 200,90 80,90" stroke="#94a3b8" />
+                                <!-- Rusuk Penghubung Samping -->
+                                <line x1="40" y1="150" x2="80" y2="180" stroke="#475569" stroke-dasharray="4,4" /> <!-- AD -->
+                                <line x1="160" y1="150" x2="200" y2="180" stroke="#f59e0b" stroke-width="3" /> <!-- BC (Amber) -->
+                                <line x1="40" y1="60" x2="80" y2="90" stroke="#94a3b8" /> <!-- EH -->
+                                <line x1="160" y1="60" x2="200" y2="90" stroke="#94a3b8" /> <!-- FG -->
+                                
+                                <!-- Segitiga Bantu & Proyeksi HC -->
+                                <line x1="40" y1="60" x2="200" y2="180" stroke="#64748b" stroke-dasharray="3" /> <!-- HB -->
+                                <line x1="40" y1="60" x2="160" y2="150" stroke="#ef4444" stroke-width="2.5" /> <!-- HC (Jarak Tegak Lurus) -->
+
+                                <!-- Titik-titik Utama -->
+                                <circle cx="40" cy="60" r="4" fill="#ef4444" /> <!-- H -->
+                                <circle cx="160" cy="150" r="4" fill="#38bdf8" /> <!-- C -->
+                                <circle cx="200" cy="180" r="4" fill="#38bdf8" /> <!-- B -->
+
+                                <!-- Label Titik -->
+                                <text x="25" y="60" fill="#ef4444" font-size="12" font-weight="bold">H</text>
+                                <text x="165" y="145" fill="#38bdf8" font-size="12" font-weight="bold">C</text>
+                                <text x="205" y="195" fill="#38bdf8" font-size="12" font-weight="bold">B</text>
+                                <text x="175" y="170" fill="#f59e0b" font-size="11" font-weight="bold">garis BC</text>
+                            </svg>
+                            <span class="text-[11px] text-slate-400 mt-2"><i class="fa-solid fa-eye"></i> Visualisasi Proyeksi Titik H ke Garis BC</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Interactive Scaffolding Boxes -->
+                <div class="lg:col-span-7 space-y-5">
+                    
+                    <!-- Box 1 -->
+                    <div id="s2-box-1" class="bg-white rounded-2xl border-2 border-amber-500 p-5 shadow-sm space-y-4 step-box">
+                        <div class="flex items-center justify-between border-b pb-3">
+                            <div class="flex items-center gap-2">
+                                <span class="w-6 h-6 bg-amber-500 text-white rounded-full flex items-center justify-center text-xs font-bold">1</span>
+                                <h3 class="font-bold text-slate-900 text-sm">Box 1: Analisis Segitiga Bantu & Karakteristiknya</h3>
+                            </div>
+                            <span id="s2-b1-badge" class="text-xs font-semibold text-slate-600 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded">Sedang Dikerjakan</span>
+                        </div>
+
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            Hubungkan titik <span class="font-bold text-rose-600">H</span> ke titik <span class="font-bold text-blue-600">B</span> dan titik <span class="font-bold text-blue-600">C</span> untuk membentuk segitiga bantuan $\Delta\text{HBC}$. Berdasarkan sifat balok, jenis segitiga apakah yang terbentuk dari $\Delta\text{HBC}$?
+                        </p>
+
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                            <select id="s2-b1-select" class="w-full bg-white border border-slate-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-amber-500 font-medium text-slate-800">
+                                <option value="">-- Pilih Jenis Segitiga --</option>
+                                <option value="siku_C">Segitiga Siku-Siku di titik C</option>
+                                <option value="sama_sisi">Segitiga Sama Sisi</option>
+                                <option value="sama_kaki">Segitiga Sama Kaki dengan puncak B</option>
+                            </select>
+                        </div>
+
+                        <div id="s2-b1-fb" class="hidden p-3 rounded-lg text-xs font-medium"></div>
+
+                        <div class="flex justify-between items-center pt-2">
+                            <button onclick="toggleHint('s2-b1-hint')" class="text-xs text-amber-700 bg-amber-50 border border-amber-200 hover:bg-amber-100 px-3 py-2 rounded-lg flex items-center gap-1 transition">
+                                <i class="fa-solid fa-lightbulb text-amber-500"></i> Hint Level 1
+                            </button>
+                            <button onclick="checkS2B1()" class="bg-amber-600 hover:bg-amber-700 text-white font-semibold text-xs px-5 py-2.5 rounded-xl transition flex items-center gap-1.5">
+                                Cek Jawaban <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                        <div id="s2-b1-hint" class="hidden bg-amber-50 border-l-4 border-amber-400 p-3 rounded-r-lg text-xs text-amber-900 leading-relaxed">
+                            <strong>Hint:</strong> Garis $HC$ terletak pada bidang dinding belakang $CDHG$, sedangkan garis $BC$ tegak lurus dengan bidang belakang tersebut. Oleh karena itu, $HC$ tegak lurus terhadap $BC$ di titik $C$.
+                        </div>
+                    </div>
+
+                    <!-- Box 2 -->
+                    <div id="s2-box-2" class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-4 step-box opacity-50 pointer-events-none">
+                        <div class="flex items-center justify-between border-b pb-3">
+                            <div class="flex items-center gap-2">
+                                <span class="w-6 h-6 bg-slate-300 text-slate-700 rounded-full flex items-center justify-center text-xs font-bold">2</span>
+                                <h3 class="font-bold text-slate-900 text-sm">Box 2: Proyeksi Titik H ke Garis BC</h3>
+                            </div>
+                            <span id="s2-b2-badge" class="text-xs font-semibold text-slate-400">Terkunci</span>
+                        </div>
+
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            Berdasarkan definisi jarak (ruas garis terpendek yang tegak lurus), manakah ruas garis yang menyatakan jarak dari <strong>titik H</strong> ke <strong>garis BC</strong>?
+                        </p>
+
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                            <select id="s2-b2-select" class="w-full bg-white border border-slate-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-amber-500 font-medium text-slate-800">
+                                <option value="">-- Pilih Ruas Garis Proyeksi --</option>
+                                <option value="HB">Ruas Garis HB (Diagonal Ruang)</option>
+                                <option value="HC">Ruas Garis HC (Tegak lurus terhadap BC di C)</option>
+                                <option value="HO">Ruas Garis HO (O adalah titik tengah BC)</option>
+                            </select>
+                        </div>
+
+                        <div id="s2-b2-fb" class="hidden p-3 rounded-lg text-xs font-medium"></div>
+
+                        <div class="flex justify-between items-center pt-2">
+                            <button onclick="toggleHint('s2-b2-hint')" class="text-xs text-amber-700 bg-amber-50 border border-amber-200 hover:bg-amber-100 px-3 py-2 rounded-lg flex items-center gap-1 transition">
+                                <i class="fa-solid fa-lightbulb text-amber-500"></i> Hint Level 1
+                            </button>
+                            <button onclick="checkS2B2()" class="bg-amber-600 hover:bg-amber-700 text-white font-semibold text-xs px-5 py-2.5 rounded-xl transition flex items-center gap-1.5">
+                                Cek Jawaban <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                        <div id="s2-b2-hint" class="hidden bg-amber-50 border-l-4 border-amber-400 p-3 rounded-r-lg text-xs text-amber-900 leading-relaxed">
+                            <strong>Hint:</strong> Hindari miskonsepsi! Jarak titik ke garis TIDAK selalu jatuh di titik tengah garis. Karena sudut siku-siku terletak di $C$, proyeksi titik $H$ ke garis $BC$ berada tepat di titik $C$.
+                        </div>
+                    </div>
+
+                    <!-- Box 3 -->
+                    <div id="s2-box-3" class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-4 step-box opacity-50 pointer-events-none">
+                        <div class="flex items-center justify-between border-b pb-3">
+                            <div class="flex items-center gap-2">
+                                <span class="w-6 h-6 bg-slate-300 text-slate-700 rounded-full flex items-center justify-center text-xs font-bold">3</span>
+                                <h3 class="font-bold text-slate-900 text-sm">Box 3: Kalkulasi Akhir Panjang HC</h3>
+                            </div>
+                            <span id="s2-b3-badge" class="text-xs font-semibold text-slate-400">Terkunci</span>
+                        </div>
+
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            Gunakan Teorema Pythagoras pada $\Delta\text{CDH}$ (siku-siku di $D$) dengan panjang $CD = 13\text{ m}$ dan tinggi $DH = 10\text{ m}$ untuk menghitung panjang ruas garis $HC$.
+                        </p>
+
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Masukkan Hasil Panjang HC (Jarak Titik H ke Garis BC):</label>
+                            <div class="flex items-center gap-2 max-w-xs">
+                                <span class="text-sm font-semibold text-slate-700">HC =</span>
+                                <input type="text" id="s2-b3-input" placeholder="contoh: √269" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono focus:ring-2 focus:ring-amber-500 font-medium text-slate-800">
+                                <span class="text-sm font-medium text-slate-500">meter</span>
+                            </div>
+                            <div class="flex items-center gap-1.5 pt-1">
+                                <span class="text-[11px] text-slate-500 font-medium">Simbol Cepat:</span>
+                                <button type="button" onclick="insertSymbol('s2-b3-input', '√')" class="px-2 py-0.5 bg-white border border-slate-300 hover:bg-slate-100 rounded text-xs font-mono font-bold text-slate-700 shadow-sm">√</button>
+                                <button type="button" onclick="insertSymbol('s2-b3-input', '√269')" class="px-2 py-0.5 bg-white border border-slate-300 hover:bg-slate-100 rounded text-xs font-mono font-bold text-slate-700 shadow-sm">√269</button>
+                            </div>
+                        </div>
+
+                        <div id="s2-b3-fb" class="hidden p-3 rounded-lg text-xs font-medium"></div>
+
+                        <div class="flex justify-between items-center pt-2">
+                            <button onclick="toggleHint('s2-b3-hint')" class="text-xs text-amber-700 bg-amber-50 border border-amber-200 hover:bg-amber-100 px-3 py-2 rounded-lg flex items-center gap-1 transition">
+                                <i class="fa-solid fa-lightbulb text-amber-500"></i> Hint Level 1
+                            </button>
+                            <button onclick="checkS2B3()" class="bg-amber-600 hover:bg-amber-700 text-white font-semibold text-xs px-5 py-2.5 rounded-xl transition flex items-center gap-1.5 shadow-md">
+                                Selesaikan Soal 2 <i class="fa-solid fa-circle-check"></i>
+                            </button>
+                        </div>
+                        <div id="s2-b3-hint" class="hidden bg-amber-50 border-l-4 border-amber-400 p-3 rounded-r-lg text-xs text-amber-900 leading-relaxed">
+                            <strong>Hint:</strong> $HC = \sqrt{CD^2 + DH^2} = \sqrt{13^2 + 10^2} = \sqrt{169 + 100} = \sqrt{269}\text{ m}$.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SOAL 3 (TERKUNCI SEBELUM SOAL 2 SELESAI) ==================== -->
+<!-- ==================== SOAL 3 (TERKUNCI SEBELUM SOAL 2 SELESAI) ==================== -->
+        <section id="sec-soal-3" class="space-y-6 opacity-40 pointer-events-none relative transition-all duration-500">
+            
+            <div id="lock-overlay-3" class="absolute inset-0 z-20 flex flex-col items-center justify-center locked-overlay rounded-2xl border-2 border-dashed border-slate-300 p-6 text-center backdrop-blur-sm bg-white/60">
+                <div class="p-4 bg-slate-200 text-slate-600 rounded-full mb-3 shadow-inner">
+                    <i class="fa-solid fa-lock text-3xl"></i>
+                </div>
+                <h3 class="text-base font-bold text-slate-800">Soal 3 Terkunci</h3>
+                <p class="text-xs text-slate-500 max-w-md mt-1">Selesaikan seluruh Box Scaffolding pada <strong>Soal 2</strong> terlebih dahulu untuk membuka akses ke Soal 3.</p>
+            </div>
+
+            <div class="flex items-center justify-between bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm">3</span>
+                    Soal 3: Panggung Krapyak – Penataan Objek Bebas (Asimetris)
+                </h2>
+                <span id="badge-soal-3" class="text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full border border-slate-200">Terkunci</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Left: Stimulus Soal 3 -->
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4 sticky top-20">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                                <i class="fa-solid fa-map-pin text-blue-600"></i> Penataan Interior Krapyak
+                            </span>
+                            <span class="text-xs font-mono bg-blue-50 text-blue-700 px-2 py-0.5 rounded border border-blue-200">Posisi Asimetris</span>
+                        </div>
+                        <div class="bg-blue-50/60 border border-blue-200 p-4 rounded-xl text-sm leading-relaxed text-slate-800 space-y-2">
+                            <strong>Deskripsi Kasus:</strong><br>
+                            Di dalam area ruang utama Panggung Krapyak, pengelola memasang sebuah panel pameran bersejarah pada dinding belakang $CDHG$ (titik panel dinamakan <strong>titik P</strong>). Posisi panel berada di tengah-tengah antara $D$ dan $H$ ($DP = PH = 5\text{ m}$). Pengunjung berada di jalur lintasan koridor lantai bawah yang diwakili oleh garis $AB$ ($13\text{ m}$). Pengelola ingin memasang sensor penerang dari titik panel $P$ tegak lurus menuju koridor garis $AB$.
+                        </div>
+
+                        <!-- SVG Visualisasi Soal 3 -->
+                        <div class="bg-slate-900 rounded-xl p-4 text-white relative flex flex-col items-center justify-center min-h-[240px]">
+                            <svg width="240" height="190" viewBox="0 0 240 190" class="stroke-white fill-none stroke-2">
+                                <polygon points="40,150 160,150 160,60 40,60" stroke="#475569" stroke-dasharray="4,4" />
+                                <polygon points="80,180 200,180 200,90 80,90" stroke="#94a3b8" />
+                                <line x1="40" y1="150" x2="80" y2="180" stroke="#3b82f6" stroke-width="3" /> <!-- AB (Koridor) -->
+                                <line x1="40" y1="60" x2="80" y2="90" stroke="#94a3b8" />
+                                <line x1="160" y1="60" x2="200" y2="90" stroke="#94a3b8" />
+                                
+                                <!-- Proyeksi P ke A dan P ke B -->
+                                <line x1="40" y1="105" x2="80" y2="180" stroke="#ef4444" stroke-width="2.5" /> <!-- PA -->
+                                <circle cx="40" cy="105" r="4" fill="#ef4444" /> <!-- P (Tengah DH) -->
+                                <circle cx="80" cy="180" r="4" fill="#38bdf8" /> <!-- A -->
+                                <circle cx="40" cy="150" r="4" fill="#94a3b8" /> <!-- D -->
+                                
+                                <text x="25" y="105" fill="#ef4444" font-size="12" font-weight="bold">P</text>
+                                <text x="70" y="195" fill="#38bdf8" font-size="12" font-weight="bold">A</text>
+                                <text x="25" y="155" fill="#94a3b8" font-size="11">D</text>
+                                <text x="50" y="175" fill="#3b82f6" font-size="11" font-weight="bold">garis AB</text>
+                            </svg>
+                            <span class="text-[11px] text-slate-400 mt-2"><i class="fa-solid fa-eye"></i> Visualisasi Titik P ke Garis AB</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Scaffolded-Box Soal 3 -->
+                <div class="lg:col-span-7 space-y-5">
+                    <!-- Box 1 -->
+                    <div id="s3-box-1" class="bg-white rounded-2xl border-2 border-blue-500 p-5 shadow-sm space-y-4 step-box">
+                        <div class="flex items-center justify-between border-b pb-3">
+                            <div class="flex items-center gap-2">
+                                <span class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold">1</span>
+                                <h3 class="font-bold text-slate-900 text-sm">Box 1: Identifikasi Sudut Tegak Lurus Proyeksi</h3>
+                            </div>
+                            <span id="s3-b1-badge" class="text-xs font-semibold text-slate-600 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded">Sedang Dikerjakan</span>
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            Perhatikan garis $AD$ yang menghubungkan bidang depan dan belakang balok. Karena $AD \perp AB$ dan $PD$ berada pada dinding belakang, bagaimanakah hubungan antara ruas garis $PA$ dengan garis $AB$?
+                        </p>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                            <select id="s3-b1-select" class="w-full bg-white border border-slate-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-blue-500 font-medium text-slate-800">
+                                <option value="">-- Pilih Hubungan Garis --</option>
+                                <option value="tegak_lurus">PA tegak lurus dengan AB (PA ⊥ AB) di titik A</option>
+                                <option value="sejajar">PA sejajar dengan AB</option>
+                                <option value="miring">PA memotong AB secara miring (bukan 90°)</option>
+                            </select>
+                        </div>
+                        <div id="s3-b1-fb" class="hidden p-3 rounded-lg text-xs font-medium"></div>
+                        <div class="flex justify-between items-center pt-2">
+                            <button onclick="toggleHint('s3-b1-hint')" class="text-xs text-blue-700 bg-blue-50 border border-blue-200 hover:bg-blue-100 px-3 py-2 rounded-lg flex items-center gap-1 transition">
+                                <i class="fa-solid fa-lightbulb text-amber-500"></i> Hint Level 1
+                            </button>
+                            <button onclick="checkS3B1()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs px-5 py-2.5 rounded-xl transition flex items-center gap-1.5">
+                                Cek Jawaban <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                        <div id="s3-b1-hint" class="hidden bg-blue-50 border-l-4 border-blue-400 p-3 rounded-r-lg text-xs text-blue-900 leading-relaxed">
+                            <strong>Hint:</strong> Garis $AB$ tegak lurus dengan seluruh bidang samping-belakang $ADHE$. Karena $PA$ terletak pada bidang $ADHE$, maka garis $AB$ otomatis tegak lurus dengan $PA$.
+                        </div>
+                    </div>
+
+                    <!-- Box 2 -->
+                    <div id="s3-box-2" class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-4 step-box opacity-50 pointer-events-none">
+                        <div class="flex items-center justify-between border-b pb-3">
+                            <div class="flex items-center gap-2">
+                                <span class="w-6 h-6 bg-slate-300 text-slate-700 rounded-full flex items-center justify-center text-xs font-bold">2</span>
+                                <h3 class="font-bold text-slate-900 text-sm">Box 2: Menentukan Panjang Sisi Siku-Siku (PD dan AD)</h3>
+                            </div>
+                            <span id="s3-b2-badge" class="text-xs font-semibold text-slate-400">Terkunci</span>
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            Sebelum menghitung $PA$, sebutkan berapa panjang $PD$ (setengah tinggi $DH = 10\text{ m}$) dan panjang rusuk alas $AD$ ($13\text{ m}$)!
+                        </p>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                            <select id="s3-b2-select" class="w-full bg-white border border-slate-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-blue-500 font-medium text-slate-800">
+                                <option value="">-- Pilih Ukuran PD dan AD --</option>
+                                <option value="pd5_ad13">PD = 5 m dan AD = 13 m</option>
+                                <option value="pd10_ad13">PD = 10 m dan AD = 13 m</option>
+                                <option value="pd5_ad10">PD = 5 m dan AD = 10 m</option>
+                            </select>
+                        </div>
+                        <div id="s3-b2-fb" class="hidden p-3 rounded-lg text-xs font-medium"></div>
+                        <div class="flex justify-between items-center pt-2">
+                            <button onclick="toggleHint('s3-b2-hint')" class="text-xs text-blue-700 bg-blue-50 border border-blue-200 hover:bg-blue-100 px-3 py-2 rounded-lg flex items-center gap-1 transition">
+                                <i class="fa-solid fa-lightbulb text-amber-500"></i> Hint Level 1
+                            </button>
+                            <button onclick="checkS3B2()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs px-5 py-2.5 rounded-xl transition flex items-center gap-1.5">
+                                Cek Jawaban <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                        <div id="s3-b2-hint" class="hidden bg-blue-50 border-l-4 border-blue-400 p-3 rounded-r-lg text-xs text-blue-900 leading-relaxed">
+                            <strong>Hint:</strong> Titik $P$ berada di tengah-tengah $DH$, sehingga $PD = \frac{1}{2} \times 10 = 5\text{ m}$. Rusuk alas persegi $AD = 13\text{ m}$.
+                        </div>
+                    </div>
+
+                    <!-- Box 3 -->
+                    <div id="s3-box-3" class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-4 step-box opacity-50 pointer-events-none">
+                        <div class="flex items-center justify-between border-b pb-3">
+                            <div class="flex items-center gap-2">
+                                <span class="w-6 h-6 bg-slate-300 text-slate-700 rounded-full flex items-center justify-center text-xs font-bold">3</span>
+                                <h3 class="font-bold text-slate-900 text-sm">Box 3: Hitung Panjang PA (Jarak P ke Garis AB)</h3>
+                            </div>
+                            <span id="s3-b3-badge" class="text-xs font-semibold text-slate-400">Terkunci</span>
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            Gunakan Teorema Pythagoras pada $\Delta\text{PDA}$ (siku-siku di $D$) untuk menghitung panjang jarak terpendek $PA = \sqrt{PD^2 + AD^2}$.
+                        </p>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Masukkan Hasil Panjang PA:</label>
+                            <div class="flex items-center gap-2 max-w-xs">
+                                <span class="text-sm font-semibold text-slate-700">PA =</span>
+                                <input type="text" id="s3-b3-input" placeholder="contoh: √194" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono focus:ring-2 focus:ring-blue-500 font-medium text-slate-800">
+                                <span class="text-sm font-medium text-slate-500">meter</span>
+                            </div>
+                            <div class="flex items-center gap-1.5 pt-1">
+                                <span class="text-[11px] text-slate-500 font-medium">Simbol Cepat:</span>
+                                <button type="button" onclick="insertSymbol('s3-b3-input', '√')" class="px-2 py-0.5 bg-white border border-slate-300 hover:bg-slate-100 rounded text-xs font-mono font-bold text-slate-700 shadow-sm">√</button>
+                                <button type="button" onclick="insertSymbol('s3-b3-input', '√194')" class="px-2 py-0.5 bg-white border border-slate-300 hover:bg-slate-100 rounded text-xs font-mono font-bold text-slate-700 shadow-sm">√194</button>
+                            </div>
+                        </div>
+                        <div id="s3-b3-fb" class="hidden p-3 rounded-lg text-xs font-medium"></div>
+                        <div class="flex justify-between items-center pt-2">
+                            <button onclick="toggleHint('s3-b3-hint')" class="text-xs text-blue-700 bg-blue-50 border border-blue-200 hover:bg-blue-100 px-3 py-2 rounded-lg flex items-center gap-1 transition">
+                                <i class="fa-solid fa-lightbulb text-amber-500"></i> Hint Level 1
+                            </button>
+                            <button onclick="checkS3B3()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs px-5 py-2.5 rounded-xl transition flex items-center gap-1.5 shadow-md">
+                                Selesaikan Seluruh Asesmen <i class="fa-solid fa-circle-check"></i>
+                            </button>
+                        </div>
+                        <div id="s3-b3-hint" class="hidden bg-blue-50 border-l-4 border-blue-400 p-3 rounded-r-lg text-xs text-blue-900 leading-relaxed">
+                            <strong>Hint:</strong> $PA = \sqrt{5^2 + 13^2} = \sqrt{25 + 169} = \sqrt{194}\text{ m}$.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- JavaScript Logic & Validation -->
+    <script>
+        let hintCount = 0;
+
+        function toggleHint(id) {
+            const el = document.getElementById(id);
+            if (el.classList.contains('hidden')) {
+                el.classList.remove('hidden');
+                hintCount++;
+                document.getElementById('totalHints').innerText = hintCount;
+            }
+        }
+
+        function insertSymbol(inputId, symbol) {
+            const input = document.getElementById(inputId);
+            input.value += symbol;
+            input.focus();
+        }
+
+        function setBoxSuccess(boxId, badgeId, fbId, msg) {
+            const box = document.getElementById(boxId);
+            const badge = document.getElementById(badgeId);
+            const fb = document.getElementById(fbId);
+
+            box.classList.remove('border-slate-200', 'border-2');
+            box.classList.add('border-emerald-500', 'border-2', 'bg-emerald-50/20');
+            
+            badge.innerText = "✓ Selesai";
+            badge.className = "text-xs font-bold text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded";
+
+            fb.className = "p-3 rounded-lg text-xs font-medium bg-emerald-50 text-emerald-800 border border-emerald-200";
+            fb.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> ${msg}`;
+            fb.classList.remove('hidden');
+
+            if (window.MathJax) MathJax.typesetPromise([fb]);
+        }
+
+        function setBoxError(fbId, msg) {
+            const fb = document.getElementById(fbId);
+            fb.className = "p-3 rounded-lg text-xs font-medium bg-rose-50 text-rose-800 border border-rose-200";
+            fb.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-600 mr-1"></i> ${msg}`;
+            fb.classList.remove('hidden');
+            if (window.MathJax) MathJax.typesetPromise([fb]);
+        }
+
+        function unlockBox(nextBoxId) {
+            const box = document.getElementById(nextBoxId);
+            box.classList.remove('opacity-50', 'pointer-events-none');
+            box.classList.add('border-2', 'border-emerald-500');
+        }
+
+        // ================= SOAL 1 LOGIC =================
+        function checkS1B1() {
+            const val = document.getElementById('s1-b1-input').value.trim().toLowerCase();
+            if (val.includes('6') && (val.includes('√2') || val.includes('v2') || val.includes('akar 2'))) {
+                setBoxSuccess('s1-box-1', 's1-b1-badge', 's1-b1-fb', "Sempurna! Diagonal sisi \\(AC = 6\\sqrt{2}\\text{ cm}\\).");
+                unlockBox('s1-box-2');
+            } else {
+                setBoxError('s1-b1-fb', "Jawaban belum tepat. Ingat rumus diagonal sisi kubus adalah \\(s\\sqrt{2}\\).");
+            }
+        }
+
+        function checkS1B2() {
+            const val = document.getElementById('s1-b2-select').value;
+            if (val === 'tengah') {
+                setBoxSuccess('s1-box-2', 's1-b2-badge', 's1-b2-fb', "Tepat! Karena \\(\\Delta FAC\\) sama sisi, titik O berada tepat di tengah AC.");
+                unlockBox('s1-box-3');
+            } else {
+                setBoxError('s1-b2-fb', "Pilihan belum tepat. Karena segitiga FAC simetris (sama sisi), proyeksi jatuh di tengah.");
+            }
+        }
+
+        function checkS1B3() {
+            const val = document.getElementById('s1-b3-input').value.trim().toLowerCase();
+            if (val.includes('3') && (val.includes('√6') || val.includes('v6') || val.includes('akar 6'))) {
+                setBoxSuccess('s1-box-3', 's1-b3-badge', 's1-b3-fb', "Sempurna! Jarak \\(FO = 3\\sqrt{6}\\text{ cm}\\). Soal 1 Tuntas!");
+                
+                // Finish Soal 1 & Unlock Soal 2
+                document.getElementById('badge-soal-1').innerText = "✓ TUNTAS";
+                document.getElementById('badge-soal-1').className = "text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full border border-emerald-300";
+                
+                // Unlock Soal 2
+                document.getElementById('sec-soal-2').classList.remove('opacity-40', 'pointer-events-none');
+                document.getElementById('lock-overlay-2').classList.add('hidden');
+                document.getElementById('badge-soal-2').innerText = "Dalam Proses";
+                document.getElementById('badge-soal-2').className = "text-xs font-semibold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200";
+                
+                document.getElementById('progressText').innerText = "Soal 2 dari 3";
+                document.getElementById('progressBar').style.width = "66%";
+
+                document.getElementById('sec-soal-2').scrollIntoView({ behavior: 'smooth' });
+            } else {
+                setBoxError('s1-b3-fb', "Kalkulasi belum tepat. Hitung \\(\\sqrt{(6\\sqrt{2})^2 - (3\\sqrt{2})^2} = \\sqrt{72 - 18} = \\sqrt{54}\\).");
+            }
+        }
+
+        // ================= SOAL 2 LOGIC =================
+        function checkS2B1() {
+            const val = document.getElementById('s2-b1-select').value;
+            if (val === 'siku_C' || val === 'segitiga siku-siku') {
+                setBoxSuccess('s2-box-1', 's2-b1-badge', 's2-b1-fb', "Benar! ΔHBC adalah segitiga siku-siku di titik C karena rusuk HC tegak lurus dengan BC.");
+                unlockBox('s2-box-2'); // Membuka Box 2 terlebih dahulu
+            } else {
+                setBoxError('s2-b1-fb', "Cek lagi segitiga yang melewati titik H dan garis BC");
+            }
+        }
+
+       function checkS2B2() {
+    const selectEl = document.getElementById('s2-b2-select');
+    const val = selectEl ? selectEl.value : '';
+    const fb = document.getElementById('s2-b1-fb') || document.getElementById('s2-b2-fb');
+
+    if (!val) {
+        setBoxError('s2-b2-fb', 'Pilih salah satu ruas garis!');
+        return;
+    }
+
+    // Memeriksa nilai 'HC' atau teks yang mengandung "HC"
+    if (val === 'HC' || selectEl.options[selectEl.selectedIndex].text.includes('HC')) {
+        setBoxSuccess('s2-box-2', 's2-b2-badge', 's2-b2-fb', "Tepat sekali! Karena HC ⊥ BC, proyeksi titik H pada garis BC jatuh di titik C. Maka jaraknya adalah panjang HC.");
+        unlockBox('s2-box-3');
+    } else {
+        setBoxError('s2-b2-fb', "Masih belum tepat. Ingat, jarak adalah ruas garis terpendek yang tegak lurus dari titik H ke garis BC.");
+    }
+}
+        function checkS2B3() {
+    const inputEl = document.getElementById('s2-b3-input');
+    const val = inputEl ? inputEl.value.trim().toLowerCase() : '';
+    const fb = document.getElementById('s2-b3-fb');
+
+    if (!val) {
+        setBoxError('s2-b3-fb', 'Lengkapi hasil perhitungan terlebih dahulu!');
+        return;
+    }
+
+    // Menerima variasi penulisan: "√269", "269", "sqrt(269)", "sqrt 269", atau "akar 269"
+    if (val.includes('269') || val.includes('sqrt') || val.includes('√')) {
+        setBoxSuccess('s2-box-3', 's2-b3-badge', 's2-b3-fb', 'Luar biasa! HC = √(CD² + DH²) = √(13² + 10²) = √(169 + 100) = √269 meter. Soal 2 selesai!');
+        
+        // Membuka Akses ke Soal 3
+        if (typeof unlockSoal3 === 'function') {
+            unlockSoal3();
+        } else {
+            const soal3 = document.getElementById('sec-soal-3');
+            if (soal3) {
+                soal3.classList.remove('opacity-40', 'pointer-events-none');
+            }
+        }
+    } else {
+        setBoxError('s2-b3-fb', 'Perhitungan belum tepat. Gunakan Pythagoras: HC = √(13² + 10²) = √(169 + 100).');
+    }
+}
+function unlockSoal3() {
+    const secSoal3 = document.getElementById('sec-soal-3');
+    if (secSoal3) {
+        // Menghilangkan status terkunci
+        secSoal3.classList.remove('opacity-40', 'pointer-events-none');
+        secSoal3.classList.add('transition-all', 'duration-500');
+        
+        // Mengubah badge Soal 3 jika ada
+        const badgeSoal3 = document.getElementById('s3-status-badge');
+        if (badgeSoal3) {
+            badgeSoal3.innerText = "Tersedia";
+            badgeSoal3.className = "text-xs font-semibold text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-200";
+        }
+
+        // Scroll otomatis ke Soal 3
+        setTimeout(() => {
+            secSoal3.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 400);
+    }
+}
+        // ================= SOAL 3 LOGIC =================
+       function checkS3B1() { // Sesuaikan nama fungsi di kode Anda
+    const val = document.getElementById('s3-b1-select').value;
+    const fb = document.getElementById('s3-b1-fb');
+
+    if (val === 'tegak_lurus') { // Sesuaikan value pilihan benar
+        showFeedback(fb, 'success', 'Tepat! Karena AD ⊥ AB dan PA berada di bidang yang tegak lurus AB, maka PA juga tegak lurus AB.');
+        
+        // Buka Box 2 Soal 3
+        const box2 = document.getElementById('s3-box-2');
+        if (box2) box2.classList.remove('opacity-50', 'pointer-events-none');
+    } else {
+        // PERBAIKAN FEEDBACK DI SINI:
+        showFeedback(fb, 'error', 'Belum tepat. Ingat Teorema Tiga Tegak Lurus: Karena AD ⊥ AB, maka semua garis pada bidang belakang yang melalui A tegak lurus dengan AB.');
+    }
+}
+
+       function checkS3B2() { // Sesuaikan nama fungsi di kode Anda
+    const val = document.getElementById('s3-b2-select').value; // Sesuaikan ID element dropdown
+    const fb = document.getElementById('s3-b2-fb');             // Sesuaikan ID element feedback
+
+    // Pastikan value option pada HTML Anda sesuai (misal: "pd5_ad13")
+    if (val === 'pd5_ad13' || val === 'PD = 5 m dan AD = 13 m') {
+        showFeedback(fb, 'success', 'Tepat! Panjang PD = 5 m (setengah tinggi DH) dan AD = 13 m.');
+
+        // Buka Box 3 Soal 3
+        const box3 = document.getElementById('s3-box-3');
+        const badge3 = document.getElementById('s3-b3-badge');
+        
+        if (box3) box3.classList.remove('opacity-50', 'pointer-events-none');
+        if (badge3) badge3.innerText = 'Sedang Dikerjakan';
+    } else {
+        // PERBAIKAN FEEDBACK DI SINI:
+        showFeedback(fb, 'error', 'Belum tepat. Diketahui tinggi DH = 10 m sehingga PD = 5 m, dan panjang rusuk AD = 13 m.');
+    }
+}        function checkS3B3() {
+            const val = document.getElementById('s3-b3-select').value;
+            if (val === '90') {
+                setBoxSuccess('s3-box-3', 's3-b3-badge', 's3-b3-fb', "Luar biasa! Lintasan terpendek selalu tegak lurus (90°).");
+                
+                // Finish All
+                document.getElementById('badge-soal-3').innerText = "✓ TUNTAS";
+                document.getElementById('badge-soal-3').className = "text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full border border-emerald-300";
+
+                document.getElementById('progressText').innerText = "3 dari 3 TUNTAS";
+                document.getElementById('progressBar').style.width = "100%";
+                document.getElementById('statusBadge').innerText = "✓ Seluruh Asesmen Tuntas";
+                document.getElementById('statusBadge').className = "bg-emerald-100 border border-emerald-300 text-emerald-800 font-bold px-3 py-1 rounded-md text-xs";
+
+                // Show Final Report
+                document.getElementById('summaryHints').innerText = hintCount + " Hint";
+                document.getElementById('laporanKetuntasan').classList.remove('hidden');
+                document.getElementById('laporanKetuntasan').scrollIntoView({ behavior: 'smooth' });
+            } else {
+                setBoxError('s3-b3-fb', "Ingat kembali syarat utama jarak titik ke garis.");
+            }
+        }
+function unlockSoal2() {
+    const secSoal2 = document.getElementById('sec-soal-2');
+    const lockOverlay2 = document.getElementById('lock-overlay-2');
+    const badgeSoal2 = document.getElementById('badge-soal-2');
+
+    if (secSoal2 && lockOverlay2) {
+        // Hilangkan efek transparansi & kunci interaksi
+        secSoal2.classList.remove('opacity-40', 'pointer-events-none');
+        
+        // Sembunyikan overlay gembok
+        lockOverlay2.classList.add('hidden');
+
+        // Ubah status badge Soal 2
+        if (badgeSoal2) {
+            badgeSoal2.className = "text-xs font-semibold text-teal-700 bg-teal-50 px-2.5 py-1 rounded-full border border-teal-200";
+            badgeSoal2.innerText = "Sedang Dikerjakan";
+        }
+
+        // Gulirkan layar ke Soal 2
+        secSoal2.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+// Fungsi untuk membuka Soal 2
+function unlockSoal2() {
+    const sec2 = document.getElementById('sec-soal-2');
+    const lockOverlay2 = document.getElementById('lock-overlay-2');
+    const badge2 = document.getElementById('badge-soal-2');
+
+    if (sec2) {
+        sec2.classList.remove('opacity-40', 'pointer-events-none');
+        if (lockOverlay2) lockOverlay2.remove(); // Menghapus overlay gembok
+        if (badge2) {
+            badge2.className = "text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200";
+            badge2.innerText = "Terbuka";
+        }
+        sec2.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
+// Fungsi untuk membuka Soal 3
+function unlockSoal3() {
+    const sec3 = document.getElementById('sec-soal-3');
+    const lockOverlay3 = document.getElementById('lock-overlay-3');
+    const badge3 = document.getElementById('badge-soal-3');
+
+    if (sec3) {
+        sec3.classList.remove('opacity-40', 'pointer-events-none');
+        if (lockOverlay3) lockOverlay3.remove(); // Menghapus overlay gembok
+        if (badge3) {
+            badge3.className = "text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200";
+            badge3.innerText = "Terbuka";
+        }
+        sec3.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+    </script>
+
+</body>
+</html>
