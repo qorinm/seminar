@@ -987,7 +987,6 @@
     </script>
 
         <!-- ==================== SOAL 2 (TERKUNCI SEBELUM SOAL 1 SELESAI) ==================== -->
-       <!-- ==================== SOAL 2 (TERKUNCI SEBELUM SOAL 1 SELESAI) ==================== -->
         <section id="sec-soal-2" class="space-y-6 opacity-40 pointer-events-none relative transition-all duration-500">
             
             <div id="lock-overlay-2" class="absolute inset-0 z-20 flex flex-col items-center justify-center locked-overlay rounded-2xl border-2 border-dashed border-slate-300 p-6 text-center backdrop-blur-sm bg-white/60">
@@ -1092,7 +1091,7 @@
                             </button>
                         </div>
                         <div id="s2-b1-hint" class="hidden bg-amber-50 border-l-4 border-amber-400 p-3 rounded-r-lg text-xs text-amber-900 leading-relaxed">
-                            <strong>Hint:</strong> Garis $HC$ terletak pada bidang dinding belakang $CDHG$, sedangkan garis $BC$ tegak lurus dengan bidang belakang tersebut. Oleh karena itu, $HC$ tegak lurus terhadap $BC$ di titik $C$.
+                            <strong>Hint:</strong> Garis $HC$ terletak pada bidang dinding belakang $CDHG$, sedangkan garis $BC$ tegak lurus dengan bidang belakang tersebut.
                         </div>
                     </div>
 
@@ -1130,7 +1129,7 @@
                             </button>
                         </div>
                         <div id="s2-b2-hint" class="hidden bg-amber-50 border-l-4 border-amber-400 p-3 rounded-r-lg text-xs text-amber-900 leading-relaxed">
-                            <strong>Hint:</strong> Hindari miskonsepsi! Jarak titik ke garis TIDAK selalu jatuh di titik tengah garis. Karena sudut siku-siku terletak di $C$, proyeksi titik $H$ ke garis $BC$ berada tepat di titik $C$.
+                            <strong>Hint:</strong> Hindari miskonsepsi! Jarak titik ke garis TIDAK selalu jatuh di titik tengah garis. Perhatikan kembali proyeksi titik $H$ ke garis $BC$ berada tepat di titik mana.
                         </div>
                     </div>
 
@@ -1152,7 +1151,7 @@
                             <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Masukkan Hasil Panjang HC (Jarak Titik H ke Garis BC):</label>
                             <div class="flex items-center gap-2 max-w-xs">
                                 <span class="text-sm font-semibold text-slate-700">HC =</span>
-                                <input type="text" id="s2-b3-input" placeholder="contoh: √269" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono focus:ring-2 focus:ring-amber-500 font-medium text-slate-800">
+                                <input type="text" id="s2-b3-input" placeholder="contoh: √30" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono focus:ring-2 focus:ring-amber-500 font-medium text-slate-800">
                                 <span class="text-sm font-medium text-slate-500">meter</span>
                             </div>
                             <div class="flex items-center gap-1.5 pt-1">
@@ -1173,7 +1172,7 @@
                             </button>
                         </div>
                         <div id="s2-b3-hint" class="hidden bg-amber-50 border-l-4 border-amber-400 p-3 rounded-r-lg text-xs text-amber-900 leading-relaxed">
-                            <strong>Hint:</strong> $HC = \sqrt{CD^2 + DH^2} = \sqrt{13^2 + 10^2} = \sqrt{169 + 100} = \sqrt{269}\text{ m}$.
+                            <strong>Hint:</strong> $HC = \sqrt{CD^2 + DH^2}.
                         </div>
                     </div>
 
@@ -1273,7 +1272,7 @@
                             </button>
                         </div>
                         <div id="s3-b1-hint" class="hidden bg-blue-50 border-l-4 border-blue-400 p-3 rounded-r-lg text-xs text-blue-900 leading-relaxed">
-                            <strong>Hint:</strong> Garis $AB$ tegak lurus dengan seluruh bidang samping-belakang $ADHE$. Karena $PA$ terletak pada bidang $ADHE$, maka garis $AB$ otomatis tegak lurus dengan $PA$.
+                            <strong>Hint:</strong> Garis $AB$ tegak lurus dengan seluruh bidang samping-belakang $ADHE$. Karena $PA$ terletak pada bidang $ADHE$, maka garis $AB$ bagaiman?
                         </div>
                     </div>
 
@@ -1307,7 +1306,7 @@
                             </button>
                         </div>
                         <div id="s3-b2-hint" class="hidden bg-blue-50 border-l-4 border-blue-400 p-3 rounded-r-lg text-xs text-blue-900 leading-relaxed">
-                            <strong>Hint:</strong> Titik $P$ berada di tengah-tengah $DH$, sehingga $PD = \frac{1}{2} \times 10 = 5\text{ m}$. Rusuk alas persegi $AD = 13\text{ m}$.
+                            <strong>Hint:</strong> Titik $P$ berada di tengah-tengah $DH$, 
                         </div>
                     </div>
 
@@ -1346,7 +1345,7 @@
                             </button>
                         </div>
                         <div id="s3-b3-hint" class="hidden bg-blue-50 border-l-4 border-blue-400 p-3 rounded-r-lg text-xs text-blue-900 leading-relaxed">
-                            <strong>Hint:</strong> $PA = \sqrt{5^2 + 13^2} = \sqrt{25 + 169} = \sqrt{194}\text{ m}$.
+                            <strong>Hint:</strong> $PA = \sqrt{5^2 + 13^2}$ 
                         </div>
                     </div>
                 </div>
@@ -1561,28 +1560,216 @@ function unlockSoal3() {
         // PERBAIKAN FEEDBACK DI SINI:
         showFeedback(fb, 'error', 'Belum tepat. Diketahui tinggi DH = 10 m sehingga PD = 5 m, dan panjang rusuk AD = 13 m.');
     }
-}        function checkS3B3() {
-            const val = document.getElementById('s3-b3-select').value;
-            if (val === '90') {
-                setBoxSuccess('s3-box-3', 's3-b3-badge', 's3-b3-fb', "Luar biasa! Lintasan terpendek selalu tegak lurus (90°).");
-                
-                // Finish All
-                document.getElementById('badge-soal-3').innerText = "✓ TUNTAS";
-                document.getElementById('badge-soal-3').className = "text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full border border-emerald-300";
+}        
+function checkS3B3() {
+    const input = document.getElementById('s3-b3-input');
+    const val = input ? input.value.trim().toLowerCase().replace(/\s/g, '') : '';
 
-                document.getElementById('progressText').innerText = "3 dari 3 TUNTAS";
-                document.getElementById('progressBar').style.width = "100%";
-                document.getElementById('statusBadge').innerText = "✓ Seluruh Asesmen Tuntas";
-                document.getElementById('statusBadge').className = "bg-emerald-100 border border-emerald-300 text-emerald-800 font-bold px-3 py-1 rounded-md text-xs";
+    const isCorrect =
+        val === '√194' ||
+        val === 'sqrt194' ||
+        val === 'v194' ||
+        val === 'akar194';
 
-                // Show Final Report
-                document.getElementById('summaryHints').innerText = hintCount + " Hint";
-                document.getElementById('laporanKetuntasan').classList.remove('hidden');
-                document.getElementById('laporanKetuntasan').scrollIntoView({ behavior: 'smooth' });
-            } else {
-                setBoxError('s3-b3-fb', "Ingat kembali syarat utama jarak titik ke garis.");
-            }
-        }
+    if (!isCorrect) {
+        setBoxError(
+            's3-b3-fb',
+            'Jawaban belum tepat. Ingat, PA = √(PD² + AD²) = √194 m.'
+        );
+        return;
+    }
+
+    // =========================
+    // SOAL 3 SELESAI
+    // =========================
+    setBoxSuccess(
+        's3-box-3',
+        's3-b3-badge',
+        's3-b3-fb',
+        'Tepat! PA = √(5² + 13²) = √194 m.'
+    );
+
+    const badgeSoal3 = document.getElementById('badge-soal-3');
+
+    if (badgeSoal3) {
+        badgeSoal3.innerText = '✓ TUNTAS';
+        badgeSoal3.className =
+            'text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full border border-emerald-300';
+    }
+
+    // =========================
+    // UPDATE HEADER
+    // =========================
+    const progressText = document.getElementById('progressText');
+    const progressBar = document.getElementById('progressBar');
+    const statusBadge = document.getElementById('statusBadge');
+
+    if (progressText) {
+        progressText.innerText = '3 / 3 Step';
+    }
+
+    if (progressBar) {
+        progressBar.style.width = '100%';
+    }
+
+    if (statusBadge) {
+        statusBadge.innerHTML =
+            '<span class="w-2 h-2 rounded-full bg-emerald-500"></span>' +
+            '<span>Tuntas</span>';
+
+        statusBadge.className =
+            'bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs px-2.5 py-1.5 rounded-lg font-bold flex items-center space-x-1.5';
+    }
+
+    // =========================
+    // TAMPILKAN LAPORAN
+    // =========================
+    tampilkanLaporanAkhir();
+}
+function tampilkanLaporanAkhir() {
+
+    const reportCard = document.getElementById('reportCard');
+
+    if (!reportCard) {
+        console.error('reportCard tidak ditemukan!');
+        return;
+    }
+
+    // ==========================================
+    // HITUNG TOTAL HINT YANG BENAR-BENAR DIPAKAI
+    // ==========================================
+
+    // Versi asesmen kamu sekarang menggunakan hintCount
+    // setiap kali tombol Hint dibuka.
+    const totalHint = hintCount;
+
+
+    // ==========================================
+    // NAMA DAN KELAS
+    // ==========================================
+
+    const namaEl = document.getElementById('studentName');
+    const kelasEl = document.getElementById('studentClass');
+
+    const nama =
+        namaEl && namaEl.value.trim()
+            ? namaEl.value.trim()
+            : 'Siswa (Tanpa Nama)';
+
+    const kelas =
+        kelasEl && kelasEl.value.trim()
+            ? kelasEl.value.trim()
+            : '-';
+
+    const reportNama =
+        document.getElementById('reportStudentName');
+
+    const reportKelas =
+        document.getElementById('reportStudentClass');
+
+    if (reportNama) {
+        reportNama.innerText = nama;
+    }
+
+    if (reportKelas) {
+        reportKelas.innerText = kelas;
+    }
+
+
+    // ==========================================
+    // TOTAL HINT
+    // ==========================================
+
+    const reportHints =
+        document.getElementById('reportTotalHints');
+
+    if (reportHints) {
+        reportHints.innerText =
+            `${totalHint} Hint`;
+    }
+
+
+    // ==========================================
+    // TINGKAT KEMANDIRIAN
+    // ==========================================
+
+    const reportIndependence =
+        document.getElementById('reportIndependence');
+
+    const reportFeedback =
+        document.getElementById('reportFeedbackText');
+
+    let tingkat;
+    let feedback;
+
+
+    if (totalHint === 0) {
+
+        tingkat = 'Sangat Tinggi';
+
+        feedback =
+            'Luar biasa! Anda menyelesaikan seluruh asesmen secara mandiri tanpa menggunakan bantuan hint. Hal ini menunjukkan pemahaman konsep dimensi tiga dan kemampuan menerapkan Teorema Pythagoras dengan sangat baik.';
+
+    } else if (totalHint <= 2) {
+
+        tingkat = 'Tinggi';
+
+        feedback =
+            `Bagus! Anda berhasil menyelesaikan seluruh asesmen dengan hanya menggunakan ${totalHint} hint. Anda sudah cukup mandiri dalam memahami konsep dan menyelesaikan masalah.`;
+
+    } else if (totalHint <= 4) {
+
+        tingkat = 'Cukup Mandiri';
+
+        feedback =
+            `Anda berhasil menyelesaikan seluruh asesmen dengan menggunakan ${totalHint} hint. Bantuan digunakan sebagai scaffolding ketika mengalami kesulitan. Pemahaman konsep sudah berkembang, tetapi masih perlu latihan agar semakin mandiri.`;
+
+    } else {
+
+        tingkat = 'Perlu Dukungan';
+
+        feedback =
+            `Anda berhasil menuntaskan seluruh asesmen dengan bantuan ${totalHint} hint. Gunakan kembali langkah-langkah pada hint sebagai bahan belajar dan latihan agar pada soal berikutnya dapat menyelesaikan masalah dengan lebih mandiri.`;
+    }
+
+
+    if (reportIndependence) {
+        reportIndependence.innerText = tingkat;
+    }
+
+    if (reportFeedback) {
+        reportFeedback.innerText = feedback;
+    }
+
+
+    // ==========================================
+    // TAMPILKAN REPORT CARD
+    // ==========================================
+
+    reportCard.classList.remove('hidden');
+
+
+    // ==========================================
+    // LETAKKAN REPORT TEPAT DI BAWAH SOAL 3
+    // ==========================================
+
+    const soal3 = document.getElementById('sec-soal-3');
+
+    if (soal3) {
+
+        // Pindahkan report card ke bawah Soal 3
+        soal3.parentNode.insertBefore(
+            reportCard,
+            soal3.nextSibling
+        );
+    }
+
+
+    // MathJax
+    if (window.MathJax) {
+        MathJax.typesetPromise([reportCard]);
+    }
+}
 function unlockSoal2() {
     const secSoal2 = document.getElementById('sec-soal-2');
     const lockOverlay2 = document.getElementById('lock-overlay-2');
