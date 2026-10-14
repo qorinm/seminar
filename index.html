@@ -67,6 +67,16 @@
             animation: pulse-subtle 2s infinite ease-in-out;
         }
     </style>
+<style>
+@media print {
+  body { background: white !important; color: #111827 !important; }
+  header, #reportCard, button, .no-print { display: none !important; }
+  #reportSoal2, #reportSoal3, #finalReportActions { display: block !important; }
+  #reportSoal2, #reportSoal3 { break-inside: avoid; color: #111827 !important; background: white !important; border: 1px solid #9ca3af !important; box-shadow: none !important; margin-bottom: 16px; }
+  #reportSoal2 *, #reportSoal3 * { color: #111827 !important; }
+  #reportsGroup { display: block !important; }
+}
+</style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col antialiased">
 
@@ -335,7 +345,7 @@
                             
                             <div class="flex items-center gap-2 max-w-xs">
                                 <span class="text-sm font-semibold text-slate-700">AO =</span>
-                                <input type="text" id="q3_input" placeholder="contoh: 2√2" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-teal-500 font-mono font-medium text-slate-800">
+                                <input type="text" id="q3_input" placeholder="contoh: 2√3" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-teal-500 font-mono font-medium text-slate-800">
                                 <span class="text-sm font-medium text-slate-500">cm</span>
                             </div>
 
@@ -388,7 +398,7 @@
                             
                             <div class="flex items-center gap-2 max-w-xs">
                                 <span class="text-sm font-semibold text-slate-700">FO =</span>
-                                <input type="text" id="q4_input" placeholder="contoh: 2√2" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-teal-500 font-mono font-medium text-slate-800">
+                                <input type="text" id="q4_input" placeholder="contoh: 2√3" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-teal-500 font-mono font-medium text-slate-800">
                                 <span class="text-sm font-medium text-slate-500">cm</span>
                             </div>
 
@@ -987,6 +997,7 @@
     </script>
 
         <!-- ==================== SOAL 2 (TERKUNCI SEBELUM SOAL 1 SELESAI) ==================== -->
+       <!-- ==================== SOAL 2 (TERKUNCI SEBELUM SOAL 1 SELESAI) ==================== -->
         <section id="sec-soal-2" class="space-y-6 opacity-40 pointer-events-none relative transition-all duration-500">
             
             <div id="lock-overlay-2" class="absolute inset-0 z-20 flex flex-col items-center justify-center locked-overlay rounded-2xl border-2 border-dashed border-slate-300 p-6 text-center backdrop-blur-sm bg-white/60">
@@ -1091,7 +1102,7 @@
                             </button>
                         </div>
                         <div id="s2-b1-hint" class="hidden bg-amber-50 border-l-4 border-amber-400 p-3 rounded-r-lg text-xs text-amber-900 leading-relaxed">
-                            <strong>Hint:</strong> Garis $HC$ terletak pada bidang dinding belakang $CDHG$, sedangkan garis $BC$ tegak lurus dengan bidang belakang tersebut.
+                            <strong>Hint:</strong> Garis $HC$ terletak pada bidang dinding belakang $CDHG$, sedangkan garis $BC$ tegak lurus dengan bidang belakang tersebut. Oleh karena itu, $HC$ tegak lurus terhadap $BC$ di titik $C$.
                         </div>
                     </div>
 
@@ -1129,7 +1140,7 @@
                             </button>
                         </div>
                         <div id="s2-b2-hint" class="hidden bg-amber-50 border-l-4 border-amber-400 p-3 rounded-r-lg text-xs text-amber-900 leading-relaxed">
-                            <strong>Hint:</strong> Hindari miskonsepsi! Jarak titik ke garis TIDAK selalu jatuh di titik tengah garis. Perhatikan kembali proyeksi titik $H$ ke garis $BC$ berada tepat di titik mana.
+                            <strong>Hint:</strong> Hindari miskonsepsi! Jarak titik ke garis TIDAK selalu jatuh di titik tengah garis. Karena sudut siku-siku terletak di $C$, proyeksi titik $H$ ke garis $BC$ berada tepat di titik $C$.
                         </div>
                     </div>
 
@@ -1151,13 +1162,13 @@
                             <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Masukkan Hasil Panjang HC (Jarak Titik H ke Garis BC):</label>
                             <div class="flex items-center gap-2 max-w-xs">
                                 <span class="text-sm font-semibold text-slate-700">HC =</span>
-                                <input type="text" id="s2-b3-input" placeholder="contoh: √30" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono focus:ring-2 focus:ring-amber-500 font-medium text-slate-800">
+                                <input type="text" id="s2-b3-input" placeholder="contoh: √131" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono focus:ring-2 focus:ring-amber-500 font-medium text-slate-800">
                                 <span class="text-sm font-medium text-slate-500">meter</span>
                             </div>
                             <div class="flex items-center gap-1.5 pt-1">
                                 <span class="text-[11px] text-slate-500 font-medium">Simbol Cepat:</span>
                                 <button type="button" onclick="insertSymbol('s2-b3-input', '√')" class="px-2 py-0.5 bg-white border border-slate-300 hover:bg-slate-100 rounded text-xs font-mono font-bold text-slate-700 shadow-sm">√</button>
-                                <button type="button" onclick="insertSymbol('s2-b3-input', '√269')" class="px-2 py-0.5 bg-white border border-slate-300 hover:bg-slate-100 rounded text-xs font-mono font-bold text-slate-700 shadow-sm">√269</button>
+                               
                             </div>
                         </div>
 
@@ -1172,7 +1183,7 @@
                             </button>
                         </div>
                         <div id="s2-b3-hint" class="hidden bg-amber-50 border-l-4 border-amber-400 p-3 rounded-r-lg text-xs text-amber-900 leading-relaxed">
-                            <strong>Hint:</strong> $HC = \sqrt{CD^2 + DH^2}.
+                            <strong>Hint:</strong> $HC = \sqrt{CD^2 + DH^2}$.
                         </div>
                     </div>
 
@@ -1272,7 +1283,7 @@
                             </button>
                         </div>
                         <div id="s3-b1-hint" class="hidden bg-blue-50 border-l-4 border-blue-400 p-3 rounded-r-lg text-xs text-blue-900 leading-relaxed">
-                            <strong>Hint:</strong> Garis $AB$ tegak lurus dengan seluruh bidang samping-belakang $ADHE$. Karena $PA$ terletak pada bidang $ADHE$, maka garis $AB$ bagaiman?
+                            <strong>Hint:</strong> Garis $AB$ tegak lurus dengan seluruh bidang samping-belakang $ADHE$. Karena $PA$ terletak pada bidang $ADHE$, maka garis $AB$ otomatis tegak lurus dengan $PA$.
                         </div>
                     </div>
 
@@ -1306,7 +1317,7 @@
                             </button>
                         </div>
                         <div id="s3-b2-hint" class="hidden bg-blue-50 border-l-4 border-blue-400 p-3 rounded-r-lg text-xs text-blue-900 leading-relaxed">
-                            <strong>Hint:</strong> Titik $P$ berada di tengah-tengah $DH$, 
+                            <strong>Hint:</strong> Titik $P$ berada di tengah-tengah $DH$, dan $AD$ merupakan rusuk alas.
                         </div>
                     </div>
 
@@ -1326,14 +1337,13 @@
                             <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Masukkan Hasil Panjang PA:</label>
                             <div class="flex items-center gap-2 max-w-xs">
                                 <span class="text-sm font-semibold text-slate-700">PA =</span>
-                                <input type="text" id="s3-b3-input" placeholder="contoh: √100" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono focus:ring-2 focus:ring-blue-500 font-medium text-slate-800">
+                                <input type="text" id="s3-b3-input" placeholder="contoh: √13" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono focus:ring-2 focus:ring-blue-500 font-medium text-slate-800">
                                 <span class="text-sm font-medium text-slate-500">meter</span>
                             </div>
                             <div class="flex items-center gap-1.5 pt-1">
                                 <span class="text-[11px] text-slate-500 font-medium">Simbol Cepat:</span>
                                 <button type="button" onclick="insertSymbol('s3-b3-input', '√')" class="px-2 py-0.5 bg-white border border-slate-300 hover:bg-slate-100 rounded text-xs font-mono font-bold text-slate-700 shadow-sm">√</button>
-                                <button type="button" onclick="insertSymbol('s3-b3-input', '√194')" class="px-2 py-0.5 bg-white border border-slate-300 hover:bg-slate-100 rounded text-xs font-mono font-bold text-slate-700 shadow-sm">√194</button>
-                            </div>
+                        </div>
                         </div>
                         <div id="s3-b3-fb" class="hidden p-3 rounded-lg text-xs font-medium"></div>
                         <div class="flex justify-between items-center pt-2">
@@ -1345,25 +1355,157 @@
                             </button>
                         </div>
                         <div id="s3-b3-hint" class="hidden bg-blue-50 border-l-4 border-blue-400 p-3 rounded-r-lg text-xs text-blue-900 leading-relaxed">
-                            <strong>Hint:</strong> $PA = \sqrt{5^2 + 13^2}$ 
+                            <strong>Hint:</strong> $PA = \sqrt{PD^2 + AD^2}$.
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-    </main>
+    
+        <!-- LAPORAN SOAL 2 DAN 3: ditampilkan bersamaan setelah semua asesmen tuntas -->
+        <div id="reportsGroup" class="space-y-5">
+        <section id="reportSoal2" class="hidden bg-gradient-to-br from-teal-900 to-slate-900 text-white rounded-2xl p-6 shadow-xl space-y-5 border border-teal-700">
+          <div class="flex items-center justify-between border-b border-teal-700/60 pb-4">
+            <div><h2 class="text-lg font-bold">Laporan Asesmen Soal 2</h2><p class="text-sm text-teal-200">Panggung Krapyak · Refleksi proses belajar</p></div>
+            <span id="s2ReportStatus" class="bg-white/10 text-teal-200 px-3 py-1 rounded-full text-xs font-bold">TUNTAS</span>
+          </div>
+          <div class="text-sm">Nama: <b id="s2ReportName">-</b> · Kelas: <b id="s2ReportClass">-</b></div>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center"><div class="text-xs text-teal-200">Status</div><b id="s2ReportCompletion">Tuntas</b></div>
+            <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center"><div class="text-xs text-teal-200">Hint dibuka</div><b id="s2ReportHints">0 hint</b></div>
+            <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center"><div class="text-xs text-teal-200">Kemandirian</div><b id="s2ReportIndependence">Sangat tinggi</b></div>
+            <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center"><div class="text-xs text-teal-200">Proses</div><b>Terpantau</b></div>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-xl p-4"><h3 class="font-bold text-teal-300 mb-2">Catatan Guru</h3><p id="s2ReportNote" class="text-sm leading-relaxed"></p></div>
+        </section>
+
+        <!-- LAPORAN SOAL 3 DAN REKAP AKHIR -->
+        <section id="reportSoal3" class="hidden bg-gradient-to-br from-teal-900 to-slate-900 text-white rounded-2xl p-6 shadow-xl space-y-5 border border-teal-700">
+          <div class="flex items-center justify-between border-b border-teal-700/60 pb-4">
+            <div><h2 class="text-lg font-bold">Laporan Asesmen Soal 3</h2><p class="text-sm text-teal-200">Panggung Krapyak · Laporan akhir asesmen</p></div>
+            <span id="s3ReportStatus" class="bg-white/10 text-teal-200 px-3 py-1 rounded-full text-xs font-bold">TUNTAS</span>
+          </div>
+          <div class="text-sm">Nama: <b id="s3ReportName">-</b> · Kelas: <b id="s3ReportClass">-</b></div>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center"><div class="text-xs text-teal-200">Status</div><b id="s3ReportCompletion">Tuntas</b></div>
+            <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center"><div class="text-xs text-teal-200">Hint Soal 3</div><b id="s3ReportHints">0 hint</b></div>
+            <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center"><div class="text-xs text-teal-200">Kemandirian</div><b id="s3ReportIndependence">Sangat tinggi</b></div>
+            <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center"><div class="text-xs text-teal-200">Total hint</div><b id="finalReportHints">0 hint</b></div>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-xl p-4"><h3 class="font-bold text-teal-300 mb-2">Catatan Guru</h3><p id="s3ReportNote" class="text-sm leading-relaxed"></p></div>
+          <div class="bg-white/5 border border-white/10 rounded-xl p-4"><h3 class="font-bold text-teal-300 mb-2">Rekap Ketuntasan</h3><p id="finalReportNote" class="text-sm leading-relaxed"></p></div>
+        </section>
+        <div id="finalReportActions" class="hidden bg-slate-900 rounded-2xl p-4 flex flex-wrap justify-end gap-3 border border-slate-700">
+          <button onclick="window.print()" class="bg-teal-600 hover:bg-teal-500 text-white text-sm font-semibold px-5 py-3 rounded-xl flex items-center gap-2"><i class="fa-solid fa-print"></i> Cetak / Simpan Semua Laporan</button>
+          <button onclick="sendAllReportsToTeacher()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-bold px-5 py-3 rounded-xl flex items-center gap-2"><i class="fa-brands fa-whatsapp text-lg"></i> Kirim Laporan ke Guru</button>
+        </div>
+        </div>
+
+</main>
 
     <!-- JavaScript Logic & Validation -->
     <script>
         let hintCount = 0;
+        const hintsByQuestion = { 1: 0, 2: 0, 3: 0 };
+        const openedHints = new Set();
 
         function toggleHint(id) {
             const el = document.getElementById(id);
+            if (!el) return;
             if (el.classList.contains('hidden')) {
                 el.classList.remove('hidden');
-                hintCount++;
-                document.getElementById('totalHints').innerText = hintCount;
+                // Hitung satu kali untuk setiap panel hint yang benar-benar dibuka.
+                if (!openedHints.has(id)) {
+                    openedHints.add(id);
+                    hintCount++;
+                    const question = id.startsWith('s2-') ? 2 : (id.startsWith('s3-') ? 3 : 1);
+                    hintsByQuestion[question]++;
+                }
+                // Total gabungan selalu mencakup hint Soal 1, Soal 2, dan Soal 3.
+                const allHintsTotal = (typeof state !== 'undefined' ? state.totalHintsUsed : 0) + hintCount;
+                const totalEl = document.getElementById('totalHints');
+                if (totalEl) totalEl.innerText = allHintsTotal;
+                const badge = document.getElementById('hintCountBadge');
+                if (badge) badge.innerText = allHintsTotal;
             }
+        }
+
+        function reportIdentity(prefix) {
+            const name = document.getElementById('studentName')?.value.trim() || 'Nama belum diisi';
+            const cls = document.getElementById('studentClass')?.value.trim() || 'Kelas belum diisi';
+            const n = document.getElementById(prefix + 'ReportName');
+            const c = document.getElementById(prefix + 'ReportClass');
+            if (n) n.innerText = name;
+            if (c) c.innerText = cls;
+        }
+
+        function independenceFor(hints) {
+            if (hints === 0) return { level: 'Sangat tinggi', note: 'Kamu menyelesaikan bagian ini tanpa membuka hint. Pertahankan kebiasaan mencoba, memeriksa, dan menjelaskan alasanmu.' };
+            if (hints <= 2) return { level: 'Tinggi', note: 'Kamu sudah berusaha mandiri dan menggunakan hint seperlunya. Coba ingat kembali langkah yang membantu agar kamu makin percaya diri saat mengerjakan soal serupa.' };
+            if (hints <= 4) return { level: 'Berkembang', note: 'Kamu memanfaatkan beberapa hint untuk membangun pemahaman. Itu bagian dari proses belajar. Coba kerjakan kembali langkah-langkahnya tanpa melihat hint untuk memperkuat pemahaman.' };
+            return { level: 'Perlu latihan bertahap', note: 'Kamu menggunakan banyak hint untuk menyelesaikan soal. Tidak apa-apa—hint adalah bantuan belajar, bukan kegagalan. Kita bisa mengulang konsep dasar dan berlatih bertahap sampai kamu lebih yakin.' };
+        }
+
+        function showQuestionReport(question) {
+            const prefix = question === 2 ? 's2' : 's3';
+            const count = hintsByQuestion[question] || 0;
+            const result = independenceFor(count);
+            reportIdentity(prefix);
+            document.getElementById(prefix + 'ReportHints').innerText = count + ' hint';
+            document.getElementById(prefix + 'ReportIndependence').innerText = result.level;
+            document.getElementById(prefix + 'ReportNote').innerText = result.note;
+            document.getElementById(prefix + 'ReportCompletion').innerText = 'Tuntas';
+            document.getElementById(prefix + 'ReportStatus').innerText = 'TUNTAS';
+            // Laporan hanya diisi di belakang layar. Kartu Soal 2 dan Soal 3
+            // baru ditampilkan bersamaan setelah tombol "Selesaikan Seluruh Asesmen" berhasil.
+            if (question === 3) {
+                const totalAllQuestions = (typeof state !== 'undefined' ? state.totalHintsUsed : 0) +
+                    (hintsByQuestion[2] || 0) + (hintsByQuestion[3] || 0);
+                const totalEl = document.getElementById('finalReportHints');
+                if (totalEl) totalEl.innerText = totalAllQuestions + ' hint';
+                const totalResult = independenceFor(totalAllQuestions);
+                const finalNote = document.getElementById('finalReportNote');
+                if (finalNote) {
+                    finalNote.innerText =
+                        'Seluruh asesmen telah diselesaikan. Total hint dari Soal 1, Soal 2, dan Soal 3: ' + totalAllQuestions +
+                        '. Gambaran kemandirian keseluruhan: ' + totalResult.level +
+                        '. Hint merupakan bantuan belajar, bukan tanda kegagalan. Hasil ini dapat digunakan untuk menentukan latihan berikutnya; kemampuan dapat terus berkembang melalui latihan dan strategi yang sesuai.';
+                }
+            }
+        }
+
+        function showAllQuestionReports() {
+            // Pastikan data laporan kedua soal sudah diperbarui sebelum ditampilkan.
+            showQuestionReport(2);
+            showQuestionReport(3);
+            ['reportSoal2', 'reportSoal3'].forEach(id => {
+                const card = document.getElementById(id);
+                if (card) card.classList.remove('hidden');
+            });
+            const actions = document.getElementById('finalReportActions');
+            if (actions) actions.classList.remove('hidden');
+            const reports = document.getElementById('reportsGroup');
+            if (reports) reports.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function sendAllReportsToTeacher() {
+            const name = document.getElementById('studentName')?.value.trim() || 'Nama belum diisi';
+            const cls = document.getElementById('studentClass')?.value.trim() || 'Kelas belum diisi';
+            const s1h = typeof state !== 'undefined' ? state.totalHintsUsed : 0;
+            const s2h = hintsByQuestion[2] || 0;
+            const s3h = hintsByQuestion[3] || 0;
+            const total = s1h + s2h + s3h;
+            const s2 = independenceFor(s2h);
+            const s3 = independenceFor(s3h);
+            const overall = independenceFor(total);
+            const message = `*LAPORAN ASESMEN FORMATIF DIGITAL – PANGGUNG KRAPYAK*\n` +
+                `Nama: ${name}\nKelas: ${cls}\nStatus: SELURUH ASESMEN TUNTAS\n\n` +
+                `*SOAL 1*\nStatus: Tuntas\nHint dibuka: ${s1h}\n\n` +
+                `*SOAL 2*\nStatus: Tuntas\nHint dibuka: ${s2h}\nKemandirian: ${s2.level}\nCatatan: ${s2.note}\n\n` +
+                `*SOAL 3*\nStatus: Tuntas\nHint dibuka: ${s3h}\nKemandirian: ${s3.level}\nCatatan: ${s3.note}\n\n` +
+                `*REKAP AKHIR*\nTotal hint: ${total}\nGambaran kemandirian: ${overall.level}\n` +
+                `Catatan: Hint adalah bantuan belajar, bukan kegagalan. Kemampuan dapat terus berkembang melalui latihan dan strategi yang sesuai.`;
+            window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(message), '_blank');
         }
 
         function insertSymbol(inputId, symbol) {
@@ -1492,6 +1634,9 @@
     if (val.includes('269') || val.includes('sqrt') || val.includes('√')) {
         setBoxSuccess('s2-box-3', 's2-b3-badge', 's2-b3-fb', 'Luar biasa! HC = √(CD² + DH²) = √(13² + 10²) = √(169 + 100) = √269 meter. Soal 2 selesai!');
         
+        // Tampilkan laporan setelah animasi membuka Soal 3 selesai.
+        setTimeout(() => showQuestionReport(2), 650);
+
         // Membuka Akses ke Soal 3
         if (typeof unlockSoal3 === 'function') {
             unlockSoal3();
@@ -1502,7 +1647,7 @@
             }
         }
     } else {
-        setBoxError('s2-b3-fb', 'Perhitungan belum tepat. Gunakan Pythagoras: HC = √(13² + 10²) = √(169 + 100).');
+        setBoxError('s2-b3-fb', 'Perhitungan belum tepat. Gunakan Pythagoras untuk mencari HC');
     }
 }
 function unlockSoal3() {
@@ -1560,216 +1705,39 @@ function unlockSoal3() {
         // PERBAIKAN FEEDBACK DI SINI:
         showFeedback(fb, 'error', 'Belum tepat. Diketahui tinggi DH = 10 m sehingga PD = 5 m, dan panjang rusuk AD = 13 m.');
     }
-}        
-function checkS3B3() {
-    const input = document.getElementById('s3-b3-input');
-    const val = input ? input.value.trim().toLowerCase().replace(/\s/g, '') : '';
+}        function checkS3B3() {
+            const input = document.getElementById('s3-b3-input');
+            const val = input ? input.value.trim().toLowerCase().replace(/\s+/g, '') : '';
+            if (!val) {
+                setBoxError('s3-b3-fb', 'Masukkan hasil perhitungan terlebih dahulu.');
+                return;
+            }
 
-    const isCorrect =
-        val === '√194' ||
-        val === 'sqrt194' ||
-        val === 'v194' ||
-        val === 'akar194';
-
-    if (!isCorrect) {
-        setBoxError(
-            's3-b3-fb',
-            'Jawaban belum tepat. Ingat, PA = √(PD² + AD²) = √194 m.'
-        );
-        return;
-    }
-
-    // =========================
-    // SOAL 3 SELESAI
-    // =========================
-    setBoxSuccess(
-        's3-box-3',
-        's3-b3-badge',
-        's3-b3-fb',
-        'Tepat! PA = √(5² + 13²) = √194 m.'
-    );
-
-    const badgeSoal3 = document.getElementById('badge-soal-3');
-
-    if (badgeSoal3) {
-        badgeSoal3.innerText = '✓ TUNTAS';
-        badgeSoal3.className =
-            'text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full border border-emerald-300';
-    }
-
-    // =========================
-    // UPDATE HEADER
-    // =========================
-    const progressText = document.getElementById('progressText');
-    const progressBar = document.getElementById('progressBar');
-    const statusBadge = document.getElementById('statusBadge');
-
-    if (progressText) {
-        progressText.innerText = '3 / 3 Step';
-    }
-
-    if (progressBar) {
-        progressBar.style.width = '100%';
-    }
-
-    if (statusBadge) {
-        statusBadge.innerHTML =
-            '<span class="w-2 h-2 rounded-full bg-emerald-500"></span>' +
-            '<span>Tuntas</span>';
-
-        statusBadge.className =
-            'bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs px-2.5 py-1.5 rounded-lg font-bold flex items-center space-x-1.5';
-    }
-
-    // =========================
-    // TAMPILKAN LAPORAN
-    // =========================
-    tampilkanLaporanAkhir();
-}
-function tampilkanLaporanAkhir() {
-
-    const reportCard = document.getElementById('reportCard');
-
-    if (!reportCard) {
-        console.error('reportCard tidak ditemukan!');
-        return;
-    }
-
-    // ==========================================
-    // HITUNG TOTAL HINT YANG BENAR-BENAR DIPAKAI
-    // ==========================================
-
-    // Versi asesmen kamu sekarang menggunakan hintCount
-    // setiap kali tombol Hint dibuka.
-    const totalHint = hintCount;
-
-
-    // ==========================================
-    // NAMA DAN KELAS
-    // ==========================================
-
-    const namaEl = document.getElementById('studentName');
-    const kelasEl = document.getElementById('studentClass');
-
-    const nama =
-        namaEl && namaEl.value.trim()
-            ? namaEl.value.trim()
-            : 'Siswa (Tanpa Nama)';
-
-    const kelas =
-        kelasEl && kelasEl.value.trim()
-            ? kelasEl.value.trim()
-            : '-';
-
-    const reportNama =
-        document.getElementById('reportStudentName');
-
-    const reportKelas =
-        document.getElementById('reportStudentClass');
-
-    if (reportNama) {
-        reportNama.innerText = nama;
-    }
-
-    if (reportKelas) {
-        reportKelas.innerText = kelas;
-    }
-
-
-    // ==========================================
-    // TOTAL HINT
-    // ==========================================
-
-    const reportHints =
-        document.getElementById('reportTotalHints');
-
-    if (reportHints) {
-        reportHints.innerText =
-            `${totalHint} Hint`;
-    }
-
-
-    // ==========================================
-    // TINGKAT KEMANDIRIAN
-    // ==========================================
-
-    const reportIndependence =
-        document.getElementById('reportIndependence');
-
-    const reportFeedback =
-        document.getElementById('reportFeedbackText');
-
-    let tingkat;
-    let feedback;
-
-
-    if (totalHint === 0) {
-
-        tingkat = 'Sangat Tinggi';
-
-        feedback =
-            'Luar biasa! Anda menyelesaikan seluruh asesmen secara mandiri tanpa menggunakan bantuan hint. Hal ini menunjukkan pemahaman konsep dimensi tiga dan kemampuan menerapkan Teorema Pythagoras dengan sangat baik.';
-
-    } else if (totalHint <= 2) {
-
-        tingkat = 'Tinggi';
-
-        feedback =
-            `Bagus! Anda berhasil menyelesaikan seluruh asesmen dengan hanya menggunakan ${totalHint} hint. Anda sudah cukup mandiri dalam memahami konsep dan menyelesaikan masalah.`;
-
-    } else if (totalHint <= 4) {
-
-        tingkat = 'Cukup Mandiri';
-
-        feedback =
-            `Anda berhasil menyelesaikan seluruh asesmen dengan menggunakan ${totalHint} hint. Bantuan digunakan sebagai scaffolding ketika mengalami kesulitan. Pemahaman konsep sudah berkembang, tetapi masih perlu latihan agar semakin mandiri.`;
-
-    } else {
-
-        tingkat = 'Perlu Dukungan';
-
-        feedback =
-            `Anda berhasil menuntaskan seluruh asesmen dengan bantuan ${totalHint} hint. Gunakan kembali langkah-langkah pada hint sebagai bahan belajar dan latihan agar pada soal berikutnya dapat menyelesaikan masalah dengan lebih mandiri.`;
-    }
-
-
-    if (reportIndependence) {
-        reportIndependence.innerText = tingkat;
-    }
-
-    if (reportFeedback) {
-        reportFeedback.innerText = feedback;
-    }
-
-
-    // ==========================================
-    // TAMPILKAN REPORT CARD
-    // ==========================================
-
-    reportCard.classList.remove('hidden');
-
-
-    // ==========================================
-    // LETAKKAN REPORT TEPAT DI BAWAH SOAL 3
-    // ==========================================
-
-    const soal3 = document.getElementById('sec-soal-3');
-
-    if (soal3) {
-
-        // Pindahkan report card ke bawah Soal 3
-        soal3.parentNode.insertBefore(
-            reportCard,
-            soal3.nextSibling
-        );
-    }
-
-
-    // MathJax
-    if (window.MathJax) {
-        MathJax.typesetPromise([reportCard]);
-    }
-}
+            // PA = sqrt(5^2 + 13^2) = sqrt(194)
+            const isCorrect = ['√194', 'sqrt(194)', 'sqrt194', 'akar194', '194^0.5'].includes(val);
+            if (isCorrect) {
+                setBoxSuccess('s3-box-3', 's3-b3-badge', 's3-b3-fb',
+                    'Tepat! PA = √(5² + 13²) = √194 meter. Seluruh asesmen selesai.');
+                const badge = document.getElementById('badge-soal-3');
+                if (badge) {
+                    badge.innerText = '✓ TUNTAS';
+                    badge.className = 'text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full border border-emerald-300';
+                }
+                const progressText = document.getElementById('progressText');
+                if (progressText) progressText.innerText = '3 dari 3 TUNTAS';
+                const progressBar = document.getElementById('progressBar');
+                if (progressBar) progressBar.style.width = '100%';
+                const status = document.getElementById('statusBadge');
+                if (status) {
+                    status.innerText = '✓ Seluruh Asesmen Tuntas';
+                    status.className = 'bg-emerald-100 border border-emerald-300 text-emerald-800 font-bold px-3 py-1 rounded-md text-xs';
+                }
+                showQuestionReport(3);
+                showAllQuestionReports();
+            } else {
+                setBoxError('s3-b3-fb', 'Belum tepat. Gunakan Teorema Pythagoras: PA = √(5² + 13²) = √194 meter. Coba periksa kembali perhitunganmu.');
+            }
+        }
 function unlockSoal2() {
     const secSoal2 = document.getElementById('sec-soal-2');
     const lockOverlay2 = document.getElementById('lock-overlay-2');
